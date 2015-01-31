@@ -1,14 +1,18 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Autofac;
 using Core;
+using Core.Services;
+using SimpleMusicPlayer.Android.Services;
 using Xamarin.Forms;
 using XLabs.Forms;
 using XLabs.Ioc;
+using XLabs.Ioc.Autofac;
 using XLabs.Platform.Device;
 using XLabs.Platform.Mvvm;
 
-namespace ThatConfXamarin.Android
+namespace SimpleMusicPlayer.Android
 {
   [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
   public class MainActivity : XFormsApplicationDroid
@@ -43,18 +47,21 @@ namespace ThatConfXamarin.Android
     /// </summary>
     private void SetIoc()
     {
-      var resolverContainer = new SimpleContainer();
+      var nativeApplication = new XFormsApp<XFormsApplicationDroid>();
+      nativeApplication.Init(this);
 
-      var app = new XFormsAppDroid();
+      var containerBuilder = new ContainerBuilder();
 
-      app.Init(this);
+      containerBuilder.Register(c => AndroidDevice.CurrentDevice).As<IDevice>();
+      containerBuilder.Register(c => nativeApplication).As<IXFormsApp>();
+      containerBuilder.Register(c => new FileService()).As<IFileService>();
 
-      resolverContainer.Register(t => AndroidDevice.CurrentDevice)
-        .Register(t => t.Resolve<IDevice>().Display)
-        .Register<IDependencyContainer>(resolverContainer)
-        .Register<IXFormsApp>(app);
+      Core.App.RegisterCoreComponents(containerBuilder);
 
-      Resolver.SetResolver(resolverContainer.GetResolver());
+      var autofacContainer = new AutofacContainer(containerBuilder.Build());
+      autofacContainer.Register<IDependencyContainer>(autofacContainer);
+
+      Resolver.SetResolver(autofacContainer.GetResolver());
     }
   }
 }

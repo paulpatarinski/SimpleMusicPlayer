@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("ThatConfXamarin.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("SimpleMusicPlayer.Android.Resource", IsApplication=true)]
 
-namespace ThatConfXamarin.Android
+namespace SimpleMusicPlayer.Android
 {
 	
 	
@@ -26,48 +26,48 @@ namespace ThatConfXamarin.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::XLabs.Forms.Resource.Color.calendar_active_month_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_active_month_bg;
-			global::XLabs.Forms.Resource.Color.calendar_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_bg;
-			global::XLabs.Forms.Resource.Color.calendar_divider = global::ThatConfXamarin.Android.Resource.Color.calendar_divider;
-			global::XLabs.Forms.Resource.Color.calendar_highlighted_day_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_highlighted_day_bg;
-			global::XLabs.Forms.Resource.Color.calendar_inactive_month_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_inactive_month_bg;
-			global::XLabs.Forms.Resource.Color.calendar_selected_day_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_selected_day_bg;
-			global::XLabs.Forms.Resource.Color.calendar_selected_range_bg = global::ThatConfXamarin.Android.Resource.Color.calendar_selected_range_bg;
-			global::XLabs.Forms.Resource.Color.calendar_text_active = global::ThatConfXamarin.Android.Resource.Color.calendar_text_active;
-			global::XLabs.Forms.Resource.Color.calendar_text_inactive = global::ThatConfXamarin.Android.Resource.Color.calendar_text_inactive;
-			global::XLabs.Forms.Resource.Color.calendar_text_selected = global::ThatConfXamarin.Android.Resource.Color.calendar_text_selected;
-			global::XLabs.Forms.Resource.Color.calendar_text_selector = global::ThatConfXamarin.Android.Resource.Color.calendar_text_selector;
-			global::XLabs.Forms.Resource.Color.calendar_text_unselectable = global::ThatConfXamarin.Android.Resource.Color.calendar_text_unselectable;
-			global::XLabs.Forms.Resource.Dimension.calendar_day_headers_paddingbottom = global::ThatConfXamarin.Android.Resource.Dimension.calendar_day_headers_paddingbottom;
-			global::XLabs.Forms.Resource.Dimension.calendar_month_title_bottommargin = global::ThatConfXamarin.Android.Resource.Dimension.calendar_month_title_bottommargin;
-			global::XLabs.Forms.Resource.Dimension.calendar_month_topmargin = global::ThatConfXamarin.Android.Resource.Dimension.calendar_month_topmargin;
-			global::XLabs.Forms.Resource.Dimension.calendar_text_medium = global::ThatConfXamarin.Android.Resource.Dimension.calendar_text_medium;
-			global::XLabs.Forms.Resource.Dimension.calendar_text_small = global::ThatConfXamarin.Android.Resource.Dimension.calendar_text_small;
-			global::XLabs.Forms.Resource.Drawable.ad16 = global::ThatConfXamarin.Android.Resource.Drawable.ad16;
-			global::XLabs.Forms.Resource.Drawable.calendar_bg_selector = global::ThatConfXamarin.Android.Resource.Drawable.calendar_bg_selector;
-			global::XLabs.Forms.Resource.Id.calendar_grid = global::ThatConfXamarin.Android.Resource.Id.calendar_grid;
-			global::XLabs.Forms.Resource.Id.calendar_view = global::ThatConfXamarin.Android.Resource.Id.calendar_view;
-			global::XLabs.Forms.Resource.Id.left_arrow = global::ThatConfXamarin.Android.Resource.Id.left_arrow;
-			global::XLabs.Forms.Resource.Id.right_arrow = global::ThatConfXamarin.Android.Resource.Id.right_arrow;
-			global::XLabs.Forms.Resource.Id.title = global::ThatConfXamarin.Android.Resource.Id.title;
-			global::XLabs.Forms.Resource.Layout.calendar_pager_layout = global::ThatConfXamarin.Android.Resource.Layout.calendar_pager_layout;
-			global::XLabs.Forms.Resource.Layout.calendar_picker = global::ThatConfXamarin.Android.Resource.Layout.calendar_picker;
-			global::XLabs.Forms.Resource.Layout.dialog = global::ThatConfXamarin.Android.Resource.Layout.dialog;
-			global::XLabs.Forms.Resource.Layout.month = global::ThatConfXamarin.Android.Resource.Layout.month;
-			global::XLabs.Forms.Resource.Layout.week = global::ThatConfXamarin.Android.Resource.Layout.week;
-			global::XLabs.Forms.Resource.String.ApplicationName = global::ThatConfXamarin.Android.Resource.String.ApplicationName;
-			global::XLabs.Forms.Resource.String.Hello = global::ThatConfXamarin.Android.Resource.String.Hello;
-			global::XLabs.Forms.Resource.String.day_name_format = global::ThatConfXamarin.Android.Resource.String.day_name_format;
-			global::XLabs.Forms.Resource.String.full_date_format = global::ThatConfXamarin.Android.Resource.String.full_date_format;
-			global::XLabs.Forms.Resource.String.invalid_date = global::ThatConfXamarin.Android.Resource.String.invalid_date;
-			global::XLabs.Forms.Resource.String.library_name = global::ThatConfXamarin.Android.Resource.String.library_name;
-			global::XLabs.Forms.Resource.String.month_name_format = global::ThatConfXamarin.Android.Resource.String.month_name_format;
-			global::XLabs.Forms.Resource.Style.CalendarCell = global::ThatConfXamarin.Android.Resource.Style.CalendarCell;
-			global::XLabs.Forms.Resource.Style.CalendarCell_CalendarDate = global::ThatConfXamarin.Android.Resource.Style.CalendarCell_CalendarDate;
-			global::XLabs.Forms.Resource.Style.CalendarCell_DayHeader = global::ThatConfXamarin.Android.Resource.Style.CalendarCell_DayHeader;
-			global::XLabs.Forms.Resource.Style.CalendarTitle = global::ThatConfXamarin.Android.Resource.Style.CalendarTitle;
-			global::XLabs.Platform.Resource.String.ApplicationName = global::ThatConfXamarin.Android.Resource.String.ApplicationName;
-			global::XLabs.Platform.Resource.String.Hello = global::ThatConfXamarin.Android.Resource.String.Hello;
+			global::XLabs.Forms.Resource.Color.calendar_active_month_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_active_month_bg;
+			global::XLabs.Forms.Resource.Color.calendar_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_bg;
+			global::XLabs.Forms.Resource.Color.calendar_divider = global::SimpleMusicPlayer.Android.Resource.Color.calendar_divider;
+			global::XLabs.Forms.Resource.Color.calendar_highlighted_day_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_highlighted_day_bg;
+			global::XLabs.Forms.Resource.Color.calendar_inactive_month_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_inactive_month_bg;
+			global::XLabs.Forms.Resource.Color.calendar_selected_day_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_selected_day_bg;
+			global::XLabs.Forms.Resource.Color.calendar_selected_range_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_selected_range_bg;
+			global::XLabs.Forms.Resource.Color.calendar_text_active = global::SimpleMusicPlayer.Android.Resource.Color.calendar_text_active;
+			global::XLabs.Forms.Resource.Color.calendar_text_inactive = global::SimpleMusicPlayer.Android.Resource.Color.calendar_text_inactive;
+			global::XLabs.Forms.Resource.Color.calendar_text_selected = global::SimpleMusicPlayer.Android.Resource.Color.calendar_text_selected;
+			global::XLabs.Forms.Resource.Color.calendar_text_selector = global::SimpleMusicPlayer.Android.Resource.Color.calendar_text_selector;
+			global::XLabs.Forms.Resource.Color.calendar_text_unselectable = global::SimpleMusicPlayer.Android.Resource.Color.calendar_text_unselectable;
+			global::XLabs.Forms.Resource.Dimension.calendar_day_headers_paddingbottom = global::SimpleMusicPlayer.Android.Resource.Dimension.calendar_day_headers_paddingbottom;
+			global::XLabs.Forms.Resource.Dimension.calendar_month_title_bottommargin = global::SimpleMusicPlayer.Android.Resource.Dimension.calendar_month_title_bottommargin;
+			global::XLabs.Forms.Resource.Dimension.calendar_month_topmargin = global::SimpleMusicPlayer.Android.Resource.Dimension.calendar_month_topmargin;
+			global::XLabs.Forms.Resource.Dimension.calendar_text_medium = global::SimpleMusicPlayer.Android.Resource.Dimension.calendar_text_medium;
+			global::XLabs.Forms.Resource.Dimension.calendar_text_small = global::SimpleMusicPlayer.Android.Resource.Dimension.calendar_text_small;
+			global::XLabs.Forms.Resource.Drawable.ad16 = global::SimpleMusicPlayer.Android.Resource.Drawable.ad16;
+			global::XLabs.Forms.Resource.Drawable.calendar_bg_selector = global::SimpleMusicPlayer.Android.Resource.Drawable.calendar_bg_selector;
+			global::XLabs.Forms.Resource.Id.calendar_grid = global::SimpleMusicPlayer.Android.Resource.Id.calendar_grid;
+			global::XLabs.Forms.Resource.Id.calendar_view = global::SimpleMusicPlayer.Android.Resource.Id.calendar_view;
+			global::XLabs.Forms.Resource.Id.left_arrow = global::SimpleMusicPlayer.Android.Resource.Id.left_arrow;
+			global::XLabs.Forms.Resource.Id.right_arrow = global::SimpleMusicPlayer.Android.Resource.Id.right_arrow;
+			global::XLabs.Forms.Resource.Id.title = global::SimpleMusicPlayer.Android.Resource.Id.title;
+			global::XLabs.Forms.Resource.Layout.calendar_pager_layout = global::SimpleMusicPlayer.Android.Resource.Layout.calendar_pager_layout;
+			global::XLabs.Forms.Resource.Layout.calendar_picker = global::SimpleMusicPlayer.Android.Resource.Layout.calendar_picker;
+			global::XLabs.Forms.Resource.Layout.dialog = global::SimpleMusicPlayer.Android.Resource.Layout.dialog;
+			global::XLabs.Forms.Resource.Layout.month = global::SimpleMusicPlayer.Android.Resource.Layout.month;
+			global::XLabs.Forms.Resource.Layout.week = global::SimpleMusicPlayer.Android.Resource.Layout.week;
+			global::XLabs.Forms.Resource.String.ApplicationName = global::SimpleMusicPlayer.Android.Resource.String.ApplicationName;
+			global::XLabs.Forms.Resource.String.Hello = global::SimpleMusicPlayer.Android.Resource.String.Hello;
+			global::XLabs.Forms.Resource.String.day_name_format = global::SimpleMusicPlayer.Android.Resource.String.day_name_format;
+			global::XLabs.Forms.Resource.String.full_date_format = global::SimpleMusicPlayer.Android.Resource.String.full_date_format;
+			global::XLabs.Forms.Resource.String.invalid_date = global::SimpleMusicPlayer.Android.Resource.String.invalid_date;
+			global::XLabs.Forms.Resource.String.library_name = global::SimpleMusicPlayer.Android.Resource.String.library_name;
+			global::XLabs.Forms.Resource.String.month_name_format = global::SimpleMusicPlayer.Android.Resource.String.month_name_format;
+			global::XLabs.Forms.Resource.Style.CalendarCell = global::SimpleMusicPlayer.Android.Resource.Style.CalendarCell;
+			global::XLabs.Forms.Resource.Style.CalendarCell_CalendarDate = global::SimpleMusicPlayer.Android.Resource.Style.CalendarCell_CalendarDate;
+			global::XLabs.Forms.Resource.Style.CalendarCell_DayHeader = global::SimpleMusicPlayer.Android.Resource.Style.CalendarCell_DayHeader;
+			global::XLabs.Forms.Resource.Style.CalendarTitle = global::SimpleMusicPlayer.Android.Resource.Style.CalendarTitle;
+			global::XLabs.Platform.Resource.String.ApplicationName = global::SimpleMusicPlayer.Android.Resource.String.ApplicationName;
+			global::XLabs.Platform.Resource.String.Hello = global::SimpleMusicPlayer.Android.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

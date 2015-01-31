@@ -3,17 +3,17 @@
  */
 
 using System.ComponentModel;
-using Android;
 using Android.Graphics.Drawables;
 using Android.Views;
 using Core.Helpers.Codes;
 using Core.Helpers.Controls;
+using SimpleMusicPlayer.Android.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof (ImageButton), typeof (ImageButtonRenderer))]
 
-namespace Android
+namespace SimpleMusicPlayer.Android.Renderers
 {
   /// <summary>
   ///   Draws a button on the Android platform with the image shown in the right
@@ -46,7 +46,7 @@ namespace Android
     /// </summary>
     /// <param name="targetButton">The target button.</param>
     /// <param name="model">The model.</param>
-    private void SetImageSource(Widget.Button targetButton, ImageButton model)
+    private void SetImageSource(global::Android.Widget.Button targetButton, ImageButton model)
     {
       var packageName = Context.PackageName;
       const int padding = 10;

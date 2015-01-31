@@ -9,6 +9,14 @@
   <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Teal}">
     <Label Text="{Binding Message}" VerticalOptions="Start" HorizontalOptions="Center" />
 
+    <ListView ItemsSource="{Binding MusicFiles}" >
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <TextCell Text="{Binding ArtistName}"/>
+      </DataTemplate>
+    </ListView.ItemTemplate>  
+    </ListView>
+    
     <Button Text="Load Server Data" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
             Command="{Binding LoadMessageCommand}" />
   </StackLayout>

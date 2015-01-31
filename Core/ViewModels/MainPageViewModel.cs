@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Core.Models;
 using Core.Services;
 using Core.ViewModels.Base;
 using Xamarin.Forms;
@@ -8,19 +11,35 @@ namespace Core.ViewModels
 {
   public class MainPageViewModel : BaseViewModel
   {
-    private readonly ISampleService _sampleService;
+    private readonly IMusicFileService _musicFileService;
     private string _message;
     private ICommand _refreshCommand;
+    private ObservableCollection<MusicFile> _musicFiles;
 
-    public MainPageViewModel(ISampleService sampleService)
+    public MainPageViewModel(IMusicFileService musicFileService)
     {
-      _sampleService = sampleService;
+      _musicFileService = musicFileService;
+      _musicFileService.MusicFilesLoaded += MusicFileServiceOnMusicFilesLoaded;
+    }
+
+    private void MusicFileServiceOnMusicFilesLoaded(object sender, MusicFilesLoadedEventArgs eventArgs)
+    {
+      foreach (var musicFile in eventArgs.MusicFiles)
+      {
+        MusicFiles.Add(musicFile);
+      }
     }
 
     public string Message
     {
       get { return _message; }
       set { SetField(ref _message, value); }
+    }
+
+    public ObservableCollection<MusicFile> MusicFiles 
+    {
+      get { return _musicFiles ?? (_musicFiles = new ObservableCollection<MusicFile>()); }
+      set { SetField(ref _musicFiles, value); }
     }
 
     public ICommand LoadMessageCommand
@@ -32,9 +51,7 @@ namespace Core.ViewModels
     {
       IsBusy = true;
 
-      var result = await _sampleService.LoadMessageAsync();
-
-      Message = result.Message;
+      await _musicFileService.LoadMusicFilesAsync();
 
       IsBusy = false;
     }

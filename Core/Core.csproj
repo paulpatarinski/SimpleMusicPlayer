@@ -33,8 +33,11 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Helpers\Codes\Colors.cs" />
-    <Compile Include="Models\SampleModel.cs" />
-    <Compile Include="Services\ISampleService.cs" />
+    <Compile Include="Models\FilesLoadedEventArgs.cs" />
+    <Compile Include="Models\MusicFile.cs" />
+    <Compile Include="Models\MusicFilesLoadedEventArgs.cs" />
+    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\IMusicFileService.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Pages\Base\BasePage.cs" />
@@ -43,7 +46,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Extensions\HttpClientExtensions.cs" />
-    <Compile Include="Services\SampleService.cs" />
+    <Compile Include="Services\MusicFileService.cs" />
     <Compile Include="Helpers\Controls\ImageButton.cs" />
     <Compile Include="Helpers\Codes\ImageOrientation.cs" />
   </ItemGroup>
