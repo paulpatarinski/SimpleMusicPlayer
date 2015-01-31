@@ -10,11 +10,11 @@ using XLabs.Platform.Mvvm;
 
 namespace ThatConfXamarin.Android
 {
-	[Activity (MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : XFormsApplicationDroid
-	{
+  [Activity(MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+  public class MainActivity : XFormsApplicationDroid
+  {
     /// <summary>
-    /// Called when [create].
+    ///   Called when [create].
     /// </summary>
     /// <param name="bundle">The bundle.</param>
     protected override void OnCreate(Bundle bundle)
@@ -23,7 +23,7 @@ namespace ThatConfXamarin.Android
 
       if (!Resolver.IsSet)
       {
-        this.SetIoc();
+        SetIoc();
       }
       else
       {
@@ -39,7 +39,7 @@ namespace ThatConfXamarin.Android
     }
 
     /// <summary>
-    /// Sets the IoC.
+    ///   Sets the IoC.
     /// </summary>
     private void SetIoc()
     {
@@ -49,13 +49,12 @@ namespace ThatConfXamarin.Android
 
       app.Init(this);
 
-      resolverContainer.Register<IDevice>(t => AndroidDevice.CurrentDevice)
-        .Register<IDisplay>(t => t.Resolve<IDevice>().Display)
+      resolverContainer.Register(t => AndroidDevice.CurrentDevice)
+        .Register(t => t.Resolve<IDevice>().Display)
         .Register<IDependencyContainer>(resolverContainer)
         .Register<IXFormsApp>(app);
 
       Resolver.SetResolver(resolverContainer.GetResolver());
     }
-	}
+  }
 }
-

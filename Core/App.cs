@@ -22,7 +22,7 @@ namespace Core
     {
       ViewFactory.Register<MainPage, MainPageViewModel>();
 
-      var landingPage = (Page)ViewFactory.CreatePage<MainPageViewModel, MainPage>();
+      var landingPage = (Page) ViewFactory.CreatePage<MainPageViewModel, MainPage>();
 
       var mainNavigationPage = new NavigationPage(landingPage);
 
@@ -42,7 +42,7 @@ namespace Core
     }
 
     /// <summary>
-    /// Initializes the application.
+    ///   Initializes the application.
     /// </summary>
     public static void Init()
     {

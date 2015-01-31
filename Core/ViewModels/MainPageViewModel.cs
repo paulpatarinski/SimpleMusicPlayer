@@ -8,14 +8,14 @@ namespace Core.ViewModels
 {
   public class MainPageViewModel : BaseViewModel
   {
+    private readonly ISampleService _sampleService;
+    private string _message;
+    private ICommand _refreshCommand;
+
     public MainPageViewModel(ISampleService sampleService)
     {
       _sampleService = sampleService;
     }
-
-    readonly ISampleService _sampleService;
-
-    string _message;
 
     public string Message
     {
@@ -23,14 +23,9 @@ namespace Core.ViewModels
       set { SetField(ref _message, value); }
     }
 
-    ICommand _refreshCommand;
-
     public ICommand LoadMessageCommand
     {
-      get
-      {
-        return _refreshCommand ?? (_refreshCommand = new Command(async () => await ExecuteLoadMessageAsync()));
-      }
+      get { return _refreshCommand ?? (_refreshCommand = new Command(async () => await ExecuteLoadMessageAsync())); }
     }
 
     public async Task ExecuteLoadMessageAsync()

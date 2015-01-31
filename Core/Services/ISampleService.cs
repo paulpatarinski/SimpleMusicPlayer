@@ -5,6 +5,6 @@ namespace Core.Services
 {
   public interface ISampleService
   {
-    Task<SampleModel> LoadMessageAsync ();
+    Task<SampleModel> LoadMessageAsync();
   }
 }

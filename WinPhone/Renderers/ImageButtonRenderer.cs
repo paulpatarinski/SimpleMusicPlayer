@@ -10,32 +10,36 @@ using System.Windows.Media.Imaging;
 using Core.Helpers.Codes;
 using Core.Helpers.Controls;
 using WinPhone;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
 using Button = Xamarin.Forms.Button;
+using Image = System.Windows.Controls.Image;
+using TextAlignment = System.Windows.TextAlignment;
+using Thickness = System.Windows.Thickness;
 
-[assembly: Xamarin.Forms.ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
+[assembly: ExportRenderer(typeof (ImageButton), typeof (ImageButtonRenderer))]
+
 namespace WinPhone
 {
   /// <summary>
-  /// Draws a button on the Windows Phone platform with the image shown in the right 
-  /// position with the right size.
+  ///   Draws a button on the Windows Phone platform with the image shown in the right
+  ///   position with the right size.
   /// </summary>
   public class ImageButtonRenderer : ButtonRenderer
   {
-    private System.Windows.Controls.Image currentImage;
+    private Image currentImage;
     private ImageButton sourceButton;
 
-
     /// <summary>
-    /// Handles the initial drawing of the button.
+    ///   Handles the initial drawing of the button.
     /// </summary>
-    /// <param name="e">Information on the <see cref="Xamarin.Forms.Labs.WP.Controls.ImageButton"/>.</param> 
+    /// <param name="e">Information on the <see cref="Xamarin.Forms.Labs.WP.Controls.ImageButton" />.</param>
     protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
     {
       base.OnElementChanged(e);
 
-      sourceButton = this.Element as ImageButton;
-      var targetButton = this.Control;
+      sourceButton = Element as ImageButton;
+      var targetButton = Control;
       if (sourceButton != null && targetButton != null && !string.IsNullOrEmpty(sourceButton.ImagePath))
       {
         var stackPanel = new StackPanel
@@ -46,9 +50,9 @@ namespace WinPhone
             : Orientation.Horizontal
         };
 
-        this.currentImage = GetImage(sourceButton.ImagePath, sourceButton.ImageHeightRequest,
+        currentImage = GetImage(sourceButton.ImagePath, sourceButton.ImageHeightRequest,
           sourceButton.ImageWidthRequest);
-        SetImageMargin(this.currentImage, sourceButton.Orientation);
+        SetImageMargin(currentImage, sourceButton.Orientation);
 
         var label = new TextBlock
         {
@@ -70,23 +74,22 @@ namespace WinPhone
         if (sourceButton.Orientation == ImageOrientation.ImageOnTop ||
             sourceButton.Orientation == ImageOrientation.ImageToLeft)
         {
-          this.currentImage.HorizontalAlignment = HorizontalAlignment.Left;
-          stackPanel.Children.Add(this.currentImage);
+          currentImage.HorizontalAlignment = HorizontalAlignment.Left;
+          stackPanel.Children.Add(currentImage);
           stackPanel.Children.Add(label);
         }
         else
         {
           stackPanel.Children.Add(label);
-          stackPanel.Children.Add(this.currentImage);
+          stackPanel.Children.Add(currentImage);
         }
 
         targetButton.Content = stackPanel;
       }
-
     }
 
     /// <summary>
-    /// Called when the underlying model's properties are changed
+    ///   Called when the underlying model's properties are changed
     /// </summary>
     /// <param name="sender">Model sending the change event</param>
     /// <param name="e">Event arguments</param>
@@ -96,34 +99,34 @@ namespace WinPhone
 
       if (e.PropertyName == ImageButton.ImagePathProperty.PropertyName)
       {
-        var sourceButton = this.Element as ImageButton;
+        var sourceButton = Element as ImageButton;
         if (sourceButton != null && !string.IsNullOrEmpty(sourceButton.ImagePath))
         {
-          this.currentImage = GetImage(sourceButton.ImagePath, sourceButton.ImageHeightRequest,
+          currentImage = GetImage(sourceButton.ImagePath, sourceButton.ImageHeightRequest,
             sourceButton.ImageWidthRequest);
-          SetImageMargin(this.currentImage, sourceButton.Orientation);
+          SetImageMargin(currentImage, sourceButton.Orientation);
         }
       }
     }
 
     /// <summary>
-    /// Returns the alignment of the label on the button depending on the orientation.
+    ///   Returns the alignment of the label on the button depending on the orientation.
     /// </summary>
     /// <param name="imageOrientation">The orientation to use.</param>
     /// <returns>The alignment to use for the text.</returns>
-    private static System.Windows.TextAlignment GetTextAlignment(ImageOrientation imageOrientation)
+    private static TextAlignment GetTextAlignment(ImageOrientation imageOrientation)
     {
-      System.Windows.TextAlignment returnValue;
+      TextAlignment returnValue;
       switch (imageOrientation)
       {
         case ImageOrientation.ImageToLeft:
-          returnValue = System.Windows.TextAlignment.Left;
+          returnValue = TextAlignment.Left;
           break;
         case ImageOrientation.ImageToRight:
-          returnValue = System.Windows.TextAlignment.Right;
+          returnValue = TextAlignment.Right;
           break;
         default:
-          returnValue = System.Windows.TextAlignment.Center;
+          returnValue = TextAlignment.Center;
           break;
       }
 
@@ -131,16 +134,16 @@ namespace WinPhone
     }
 
     /// <summary>
-    /// Returns a <see cref="Image"/> of type .png that is a resource in the Windows Phone project
-    /// and stored in the images folder.
+    ///   Returns a <see cref="Image" /> of type .png that is a resource in the Windows Phone project
+    ///   and stored in the images folder.
     /// </summary>
     /// <param name="imageName">The name of the image to return.  Should be the resource name without the .png extension.</param>
     /// <param name="height">The height for the image (divides by 2 for the Windows Phone platform).</param>
     /// <param name="width">The width for the image (divides by 2 for the Windows Phone platform).</param>
     /// <returns>An image </returns>
-    private static System.Windows.Controls.Image GetImage(string imageName, int height, int width)
+    private static Image GetImage(string imageName, int height, int width)
     {
-      var image = new System.Windows.Controls.Image();
+      var image = new Image();
       var uri = new Uri("images/" + imageName + ".png", UriKind.Relative);
       var bmp = new BitmapImage(uri);
       image.Source = bmp;
@@ -150,17 +153,17 @@ namespace WinPhone
     }
 
     /// <summary>
-    /// Sets a margin of 10 between the image and the text.
+    ///   Sets a margin of 10 between the image and the text.
     /// </summary>
     /// <param name="image">The image to add a margin to.</param>
     /// <param name="orientation">The orientation of the image on the button.</param>
-    private void SetImageMargin(System.Windows.Controls.Image image, ImageOrientation orientation)
+    private void SetImageMargin(Image image, ImageOrientation orientation)
     {
       const int defaultMargin = 10;
-      int left = 0;
-      int top = 0;
-      int right = 0;
-      int bottom = 0;
+      var left = 0;
+      var top = 0;
+      var right = 0;
+      var bottom = 0;
 
       //If the button has text add a margin
       if (!string.IsNullOrEmpty(sourceButton.Text))
@@ -182,7 +185,7 @@ namespace WinPhone
         }
       }
 
-      image.Margin = new System.Windows.Thickness(left, top, right, bottom);
+      image.Margin = new Thickness(left, top, right, bottom);
     }
   }
 }

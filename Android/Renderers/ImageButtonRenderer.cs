@@ -1,136 +1,143 @@
 /*
  * Source from https://github.com/XForms/Xamarin-Forms-Labs 
  */
- 
-using Android.Graphics.Drawables;
-using Android.Views;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
+
 using System.ComponentModel;
 using Android;
-using Core;
-using System.Linq;
+using Android.Graphics.Drawables;
+using Android.Views;
+using Core.Helpers.Codes;
+using Core.Helpers.Controls;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer (typeof(Core.Helpers.Controls.ImageButton), typeof(ImageButtonRenderer))]
+[assembly: ExportRenderer(typeof (ImageButton), typeof (ImageButtonRenderer))]
+
 namespace Android
 {
-	/// <summary>
-	/// Draws a button on the Android platform with the image shown in the right 
-	/// position with the right size.
-	/// </summary>
-	public class ImageButtonRenderer : ButtonRenderer
-	{
+  /// <summary>
+  ///   Draws a button on the Android platform with the image shown in the right
+  ///   position with the right size.
+  /// </summary>
+  public class ImageButtonRenderer : ButtonRenderer
+  {
+    private ImageButton ImageButton
+    {
+      get { return (ImageButton) Element; }
+    }
 
-		private Core.Helpers.Controls.ImageButton ImageButton { get { return (Core.Helpers.Controls.ImageButton)Element; } }
+    protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
+    {
+      base.OnElementChanged(e);
 
-		protected override void OnElementChanged (ElementChangedEventArgs<Button> e)
-		{
-			base.OnElementChanged (e);
+      if (e.OldElement == null)
+      {
+        var targetButton = Control;
 
-			if (e.OldElement == null) {
-				var targetButton = (Android.Widget.Button)Control;
+        if (Element != null && !string.IsNullOrEmpty(ImageButton.ImagePath))
+        {
+          SetImageSource(targetButton, ImageButton);
+        }
+      }
+    }
 
-				if (Element != null && !string.IsNullOrEmpty (this.ImageButton.ImagePath)) {
+    /// <summary>
+    ///   Sets the image source.
+    /// </summary>
+    /// <param name="targetButton">The target button.</param>
+    /// <param name="model">The model.</param>
+    private void SetImageSource(Widget.Button targetButton, ImageButton model)
+    {
+      var packageName = Context.PackageName;
+      const int padding = 10;
+      const string resourceType = "drawable";
 
-					SetImageSource (targetButton, this.ImageButton);
-				}
-			}
-		}
+      var resId = Resources.GetIdentifier(model.ImagePath, resourceType, packageName);
+      if (resId > 0)
+      {
+        var scaledDrawable = GetScaleDrawableFromResourceId(resId, GetWidth(model.ImageWidthRequest),
+          GetHeight(model.ImageHeightRequest));
 
-		/// <summary>
-		/// Sets the image source.
-		/// </summary>
-		/// <param name="targetButton">The target button.</param>
-		/// <param name="model">The model.</param>
-		private void SetImageSource (Android.Widget.Button targetButton, Core.Helpers.Controls.ImageButton model)
-		{
-			var packageName = Context.PackageName;
-			const int padding = 10;
-			const string resourceType = "drawable";
+        Drawable left = null;
+        Drawable right = null;
+        Drawable top = null;
+        Drawable bottom = null;
+        targetButton.CompoundDrawablePadding = padding;
+        switch (model.Orientation)
+        {
+          case (ImageOrientation.ImageToLeft):
+            targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
+            left = scaledDrawable;
+            break;
+          case (ImageOrientation.ImageToRight):
+            targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
+            right = scaledDrawable;
+            break;
+          case (ImageOrientation.ImageOnTop):
+            top = scaledDrawable;
+            break;
+          case (ImageOrientation.ImageOnBottom):
+            bottom = scaledDrawable;
+            break;
+        }
 
-			var resId = Resources.GetIdentifier (model.ImagePath, resourceType, packageName);
-			if (resId > 0) {
-				var scaledDrawable = GetScaleDrawableFromResourceId (resId, GetWidth (model.ImageWidthRequest),
-					                     GetHeight (model.ImageHeightRequest));
+        targetButton.SetCompoundDrawables(left, top, right, bottom);
+      }
+    }
 
-				Drawable left = null;
-				Drawable right = null;
-				Drawable top = null;
-				Drawable bottom = null;
-				targetButton.CompoundDrawablePadding = padding;
-				switch (model.Orientation) {
-				case (Core.Helpers.Codes.ImageOrientation.ImageToLeft):
-					targetButton.Gravity = GravityFlags.Left | GravityFlags.CenterVertical;
-					left = scaledDrawable;
-					break;
-				case (Core.Helpers.Codes.ImageOrientation.ImageToRight):
-					targetButton.Gravity = GravityFlags.Right | GravityFlags.CenterVertical;
-					right = scaledDrawable;
-					break;
-				case (Core.Helpers.Codes.ImageOrientation.ImageOnTop):
-					top = scaledDrawable;
-					break;
-				case (Core.Helpers.Codes.ImageOrientation.ImageOnBottom):
-					bottom = scaledDrawable;
-					break;
-				}
+    /// <summary>
+    ///   Called when the underlying model's properties are changed
+    /// </summary>
+    /// <param name="sender">Model</param>
+    /// <param name="e">Event arguments</param>
+    protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+      base.OnElementPropertyChanged(sender, e);
 
-				targetButton.SetCompoundDrawables (left, top, right, bottom);
-			}
-		}
+      if (e.PropertyName == ImageButton.ImagePathProperty.PropertyName)
+      {
+        var targetButton = Control;
+        SetImageSource(targetButton, ImageButton);
+      }
+    }
 
-		/// <summary>
-		/// Called when the underlying model's properties are changed
-		/// </summary>
-		/// <param name="sender">Model</param>
-		/// <param name="e">Event arguments</param>
-		protected override void OnElementPropertyChanged (object sender, PropertyChangedEventArgs e)
-		{
-			base.OnElementPropertyChanged (sender, e);
+    /// <summary>
+    ///   Returns a <see cref="Drawable" /> with the correct dimensions from an
+    ///   Android resource id.
+    /// </summary>
+    /// <param name="resId">The android resource id to load the drawable from.</param>
+    /// <param name="width">The width to scale to.</param>
+    /// <param name="height">The height to scale to.</param>
+    /// <returns>A scaled <see cref="Drawable" />.</returns>
+    private Drawable GetScaleDrawableFromResourceId(int resId, int width, int height)
+    {
+      var drawable = Resources.GetDrawable(resId);
 
-			if (e.PropertyName == Core.Helpers.Controls.ImageButton.ImagePathProperty.PropertyName) {
-				var targetButton = (Android.Widget.Button)Control;
-				SetImageSource (targetButton, this.ImageButton);
-			}
-		}
+      var returnValue = new ScaleDrawable(drawable, 0, width, height).Drawable;
+      returnValue.SetBounds(0, 0, width, height);
+      return returnValue;
+    }
 
-		/// <summary>
-		/// Returns a <see cref="Drawable"/> with the correct dimensions from an 
-		/// Android resource id.
-		/// </summary>
-		/// <param name="resId">The android resource id to load the drawable from.</param>
-		/// <param name="width">The width to scale to.</param>
-		/// <param name="height">The height to scale to.</param>
-		/// <returns>A scaled <see cref="Drawable"/>.</returns>
-		private Drawable GetScaleDrawableFromResourceId (int resId, int width, int height)
-		{
-			var drawable = Resources.GetDrawable (resId);
+    /// <summary>
+    ///   Gets the width based on the requested width, if request less than 0, returns 50.
+    /// </summary>
+    /// <param name="requestedWidth">The requested width.</param>
+    /// <returns>The width to use.</returns>
+    private int GetWidth(int requestedWidth)
+    {
+      const int defaultWidth = 50;
+      return requestedWidth <= 0 ? defaultWidth : requestedWidth;
+    }
 
-			var returnValue = new ScaleDrawable (drawable, 0, width, height).Drawable;
-			returnValue.SetBounds (0, 0, width, height);
-			return returnValue;
-		}
-
-		/// <summary>
-		/// Gets the width based on the requested width, if request less than 0, returns 50.
-		/// </summary>
-		/// <param name="requestedWidth">The requested width.</param>
-		/// <returns>The width to use.</returns>
-		private int GetWidth (int requestedWidth)
-		{
-			const int defaultWidth = 50;
-			return requestedWidth <= 0 ? defaultWidth : requestedWidth;
-		}
-
-		/// <summary>
-		/// Gets the height based on the requested height, if request less than 0, returns 50.
-		/// </summary>
-		/// <param name="requestedHeight">The requested height.</param>
-		/// <returns>The height to use.</returns>
-		private int GetHeight (int requestedHeight)
-		{
-			const int defaultHeight = 50;
-			return requestedHeight <= 0 ? defaultHeight : requestedHeight;
-		}
-	}
+    /// <summary>
+    ///   Gets the height based on the requested height, if request less than 0, returns 50.
+    /// </summary>
+    /// <param name="requestedHeight">The requested height.</param>
+    /// <returns>The height to use.</returns>
+    private int GetHeight(int requestedHeight)
+    {
+      const int defaultHeight = 50;
+      return requestedHeight <= 0 ? defaultHeight : requestedHeight;
+    }
+  }
 }
