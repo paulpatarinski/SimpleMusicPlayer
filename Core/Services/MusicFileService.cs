@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
+using Core.Services.Native;
 
 namespace Core.Services
 {
   public class MusicFileService : IMusicFileService
   {
     private readonly IFileService _fileService;
+    private readonly IId3TagService _id3TagService;
 
-    public MusicFileService(IFileService fileService)
+    public MusicFileService(IFileService fileService, IId3TagService id3TagService)
     {
       _fileService = fileService;
+      _id3TagService = id3TagService;
       _fileService.FilesLoaded += FileServiceOnSongsLoaded;
     }
 
-    private void FileServiceOnSongsLoaded(object sender, FilesLoadedEventArgs eventArgs)
+    private async void FileServiceOnSongsLoaded(object sender, FilesLoadedEventArgs eventArgs)
     {
       if(MusicFilesLoaded == null)
         throw new Exception("You must subscribe to MusicFilesLoaded");
@@ -25,13 +27,21 @@ namespace Core.Services
 
       foreach (var file in eventArgs.Files)
       {
-        musicFiles.Add(new MusicFile{ArtistName = file.Name});
+        var id3Tag = await _id3TagService.GetId3TagAsync(file.Path);
+
+        musicFiles.Add(new MusicFile
+        {
+          ArtistName = id3Tag.Artist,
+          AlbumName = id3Tag.Album,
+          Genre = id3Tag.Genre,
+          SongTitle = id3Tag.Title
+        });
       }
 
       MusicFilesLoaded(this, new MusicFilesLoadedEventArgs(musicFiles));
     }
 
-    public async Task LoadMusicFilesAsync()
+    public void LoadMusicFiles()
     {
       _fileService.LoadFiles();
     }

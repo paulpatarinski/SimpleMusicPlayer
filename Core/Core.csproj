@@ -34,10 +34,12 @@
     <Compile Include="App.cs" />
     <Compile Include="Helpers\Codes\Colors.cs" />
     <Compile Include="Models\FilesLoadedEventArgs.cs" />
+    <Compile Include="Models\Id3Tag.cs" />
     <Compile Include="Models\MusicFile.cs" />
     <Compile Include="Models\MusicFilesLoadedEventArgs.cs" />
-    <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\Native\IFileService.cs" />
     <Compile Include="Services\IMusicFileService.cs" />
+    <Compile Include="Services\Native\IId3TagService.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Pages\Base\BasePage.cs" />

@@ -3,21 +3,29 @@
 <base:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                xmlns:base="clr-namespace:Core.Pages.Base;assembly=Core"
-               xmlns:models="clr-namespace:Core.Models;assembly=Core"
                xmlns:codes="clr-namespace:Core.Helpers.Codes;assembly=Core"
                x:Class="Core.Pages.MainPage">
   <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Teal}">
-    <Label Text="{Binding Message}" VerticalOptions="Start" HorizontalOptions="Center" />
-
     <ListView ItemsSource="{Binding MusicFiles}" >
     <ListView.ItemTemplate>
       <DataTemplate>
-        <TextCell Text="{Binding ArtistName}"/>
+        <ViewCell>
+          <StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding ArtistName}"/>
+              <Label Text="{Binding AlbumName}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding Genre}"/>
+              <Label Text="{Binding SongTitle}"/>
+            </StackLayout>
+          </StackLayout>
+        </ViewCell>
       </DataTemplate>
     </ListView.ItemTemplate>  
     </ListView>
     
-    <Button Text="Load Server Data" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
-            Command="{Binding LoadMessageCommand}" />
+    <Button Text="Load Songs" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
+            Command="{Binding LoadSongsCommand}" />
   </StackLayout>
 </base:BasePage>

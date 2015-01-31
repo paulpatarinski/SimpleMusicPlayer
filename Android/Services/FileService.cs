@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Core.Models;
 using Core.Services;
 using File = Core.Models.File;
@@ -18,21 +20,38 @@ namespace SimpleMusicPlayer.Android.Services
 
       try
       {
-        var root = Environment.CurrentDirectory;
-        var documentsPath = Path.Combine(root, "storage/emulated/0/Music");
+        Task.Run(() =>
+        {
+          var root = Environment.CurrentDirectory;
+          var documentsPath = Path.Combine(root, "storage/emulated/0/Music");
 
-        var directoryInfo = new DirectoryInfo(documentsPath);
+          var fileInfos = GetFilesRecursiveAsync(documentsPath);
 
-        var fileInfos = directoryInfo.EnumerateFiles();
+          var files = fileInfos.Select(fileInfo => new File {Name = fileInfo.Name, Path = fileInfo.FullName}).ToList();
 
-        var files = fileInfos.Select(fileInfo => new File {Name = fileInfo.Name, Path = fileInfo.FullName}).ToList();
-
-        FilesLoaded(this, new FilesLoadedEventArgs(files));
+          FilesLoaded(this, new FilesLoadedEventArgs(files));
+        });
       }
       catch (Exception ex)
       {
         Console.WriteLine(ex);
       }
+    }
+
+    private List<FileInfo> GetFilesRecursiveAsync(string path)
+    {
+      var rootDirectoryInfo = new DirectoryInfo(path);
+
+      var fileInfos = rootDirectoryInfo.EnumerateFiles().ToList();
+
+      var directories = rootDirectoryInfo.EnumerateDirectories();
+
+      foreach (var directoryInfo in directories)
+      {
+        fileInfos.AddRange(GetFilesRecursiveAsync(directoryInfo.FullName));
+      }
+
+      return fileInfos;
     }
   }
 }

@@ -4,6 +4,7 @@ using Android.OS;
 using Autofac;
 using Core;
 using Core.Services;
+using Core.Services.Native;
 using SimpleMusicPlayer.Android.Services;
 using Xamarin.Forms;
 using XLabs.Forms;
@@ -55,6 +56,7 @@ namespace SimpleMusicPlayer.Android
       containerBuilder.Register(c => AndroidDevice.CurrentDevice).As<IDevice>();
       containerBuilder.Register(c => nativeApplication).As<IXFormsApp>();
       containerBuilder.Register(c => new FileService()).As<IFileService>();
+      containerBuilder.Register(c => new Id3TagService()).As<IId3TagService>();
 
       Core.App.RegisterCoreComponents(containerBuilder);
 

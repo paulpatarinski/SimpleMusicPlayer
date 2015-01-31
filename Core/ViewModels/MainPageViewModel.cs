@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Core.Models;
 using Core.Services;
@@ -12,7 +10,6 @@ namespace Core.ViewModels
   public class MainPageViewModel : BaseViewModel
   {
     private readonly IMusicFileService _musicFileService;
-    private string _message;
     private ICommand _refreshCommand;
     private ObservableCollection<MusicFile> _musicFiles;
 
@@ -30,28 +27,22 @@ namespace Core.ViewModels
       }
     }
 
-    public string Message
-    {
-      get { return _message; }
-      set { SetField(ref _message, value); }
-    }
-
     public ObservableCollection<MusicFile> MusicFiles 
     {
       get { return _musicFiles ?? (_musicFiles = new ObservableCollection<MusicFile>()); }
       set { SetField(ref _musicFiles, value); }
     }
 
-    public ICommand LoadMessageCommand
+    public ICommand LoadSongsCommand
     {
-      get { return _refreshCommand ?? (_refreshCommand = new Command(async () => await ExecuteLoadMessageAsync())); }
+      get { return _refreshCommand ?? (_refreshCommand = new Command(ExecuteLoadSongs)); }
     }
 
-    public async Task ExecuteLoadMessageAsync()
+    public void ExecuteLoadSongs()
     {
       IsBusy = true;
 
-      await _musicFileService.LoadMusicFilesAsync();
+      _musicFileService.LoadMusicFiles();
 
       IsBusy = false;
     }
