@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Core.Models
 {
-  public class FilesLoadedEventArgs : EventArgs
+  public class FileLoadedEventArgs : EventArgs
   {
-    public readonly List<File> Files;
+    public readonly File File;
 
-    public FilesLoadedEventArgs(List<File> files)
+    public FileLoadedEventArgs(File file)
     {
-      Files = files;
+      File = file;
     }
   }
 

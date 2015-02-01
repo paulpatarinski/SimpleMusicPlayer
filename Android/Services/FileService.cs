@@ -1,22 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Services;
+using XLabs.Ioc;
 using File = Core.Models.File;
 
 namespace SimpleMusicPlayer.Android.Services
 {
   public class FileService : IFileService
   {
-    public event EventHandler<FilesLoadedEventArgs> FilesLoaded;
+    public event EventHandler<FileLoadedEventArgs> FileLoaded;
+    public event EventHandler<AllFilesLoadedEventArgs> AllFilesLoaded;
 
-    public void LoadFiles()
+    public void LoadFiles(string searchPattern)
     {
-      if (FilesLoaded == null)
-        throw new Exception("You must subscribe to FilesLoaded");
+      if (FileLoaded == null)
+        throw new Exception("You must subscribe to FileLoaded");
+
+      if (AllFilesLoaded == null)
+        throw new Exception("You must subscribe to AllFilesLoaded");
 
       try
       {
@@ -25,33 +29,38 @@ namespace SimpleMusicPlayer.Android.Services
           var root = Environment.CurrentDirectory;
           var documentsPath = Path.Combine(root, "storage/emulated/0/Music");
 
-          var fileInfos = GetFilesRecursiveAsync(documentsPath);
+          var numberOfFilesLoaded = LoadFilesRecursiveAsync(documentsPath, searchPattern);
 
-          var files = fileInfos.Select(fileInfo => new File {Name = fileInfo.Name, Path = fileInfo.FullName}).ToList();
-
-          FilesLoaded(this, new FilesLoadedEventArgs(files));
+          AllFilesLoaded(this, new AllFilesLoadedEventArgs(numberOfFilesLoaded));
         });
       }
       catch (Exception ex)
       {
-        Console.WriteLine(ex);
+        Resolver.Resolve<IExceptionHandlingService>().Handle(ex);
       }
     }
 
-    private List<FileInfo> GetFilesRecursiveAsync(string path)
+    private int LoadFilesRecursiveAsync(string path, string searchPattern)
     {
+      if (FileLoaded == null)
+        throw new Exception("You must subscribe to FileLoaded");
+
       var rootDirectoryInfo = new DirectoryInfo(path);
 
-      var fileInfos = rootDirectoryInfo.EnumerateFiles("*.mp3").ToList();
+      var fileInfos = rootDirectoryInfo.EnumerateFiles(searchPattern).ToList();
+
+      var numberOfFiles = fileInfos.Count;
+
+      foreach (var file in fileInfos.Select(fileInfo => new File {Name = fileInfo.Name, Path = fileInfo.FullName}))
+      {
+        FileLoaded(this, new FileLoadedEventArgs(file));
+      }
 
       var directories = rootDirectoryInfo.EnumerateDirectories();
 
-      foreach (var directoryInfo in directories)
-      {
-        fileInfos.AddRange(GetFilesRecursiveAsync(directoryInfo.FullName));
-      }
+      numberOfFiles += directories.Sum(directoryInfo => LoadFilesRecursiveAsync(directoryInfo.FullName, searchPattern));
 
-      return fileInfos;
+      return numberOfFiles;
     }
   }
 }

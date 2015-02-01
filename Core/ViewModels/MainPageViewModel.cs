@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Models;
@@ -17,21 +19,23 @@ namespace Core.ViewModels
     public MainPageViewModel(IMusicFileService musicFileService)
     {
       _musicFileService = musicFileService;
-      _musicFileService.MusicFilesLoaded += MusicFileServiceOnMusicFilesLoaded;
+      _musicFileService.MusicFileLoaded += MusicFileServiceOnMusicFileLoaded;
+      _musicFileService.AllMusicFilesLoaded += MusicFileServiceOnAllMusicFilesLoaded;
       IsLoadButtonEnabled = true;
     }
 
-    private void MusicFileServiceOnMusicFilesLoaded(object sender, MusicFilesLoadedEventArgs eventArgs)
+    private void MusicFileServiceOnAllMusicFilesLoaded(object sender, AllFilesLoadedEventArgs eventArgs)
+    {
+      IsLoadButtonEnabled = true;
+      Debug.WriteLine(eventArgs.NumberOfFiles);
+    }
+
+    private void MusicFileServiceOnMusicFileLoaded(object sender, MusicFileLoadedEventArgs eventArgs)
     {
       Device.BeginInvokeOnMainThread(() =>
       {
-        foreach (var musicFile in eventArgs.MusicFiles)
-        {
-          MusicFiles.Add(musicFile);
-        }
+        MusicFiles.Add(eventArgs.MusicFile);
       });
-
-      IsLoadButtonEnabled = true;
     }
 
     public ObservableCollection<MusicFile> MusicFiles 

@@ -6,6 +6,7 @@ namespace Core.Services
   public interface IMusicFileService
   {
     void LoadMusicFiles();
-    event EventHandler<MusicFilesLoadedEventArgs> MusicFilesLoaded;
+    event EventHandler<MusicFileLoadedEventArgs> MusicFileLoaded;
+    event EventHandler<AllFilesLoadedEventArgs> AllMusicFilesLoaded;
   }
 }

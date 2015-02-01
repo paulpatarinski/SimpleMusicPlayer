@@ -15,38 +15,43 @@ namespace Core.Services
     {
       _fileService = fileService;
       _id3TagService = id3TagService;
-      _fileService.FilesLoaded += FileServiceOnSongsLoaded;
-    }
-
-    private async void FileServiceOnSongsLoaded(object sender, FilesLoadedEventArgs eventArgs)
-    {
-      if(MusicFilesLoaded == null)
-        throw new Exception("You must subscribe to MusicFilesLoaded");
-
-      var musicFiles = new List<MusicFile>();
-
-      foreach (var file in eventArgs.Files)
-      {
-        var id3Tag = await _id3TagService.GetId3TagAsync(file);
-
-        musicFiles.Add(new MusicFile
-        {
-          FileName = file.Name,
-          ArtistName = id3Tag.Artist,
-          AlbumName = id3Tag.Album,
-          Genre = id3Tag.Genre,
-          SongTitle = id3Tag.Title,
-        });
-      }
-
-      MusicFilesLoaded(this, new MusicFilesLoadedEventArgs(musicFiles));
+      _fileService.FileLoaded += FileServiceOnFileLoaded;
+      _fileService.AllFilesLoaded += FileServiceOnAllFilesLoaded;
     }
 
     public void LoadMusicFiles()
     {
-      _fileService.LoadFiles();
+      _fileService.LoadFiles("*.mp3");
     }
 
-    public event EventHandler<MusicFilesLoadedEventArgs> MusicFilesLoaded;
+    private void FileServiceOnAllFilesLoaded(object sender, AllFilesLoadedEventArgs e)
+    {
+      if (AllMusicFilesLoaded == null)
+        throw new Exception("You must subscribe to AllMusicFilesLoaded");
+
+      AllMusicFilesLoaded(sender, e);
+    }
+
+    private async void FileServiceOnFileLoaded(object sender, FileLoadedEventArgs eventArgs)
+    {
+      if (MusicFileLoaded == null)
+        throw new Exception("You must subscribe to MusicFileLoaded");
+
+      var id3Tag = await _id3TagService.GetId3TagAsync(eventArgs.File);
+
+      var musicFile = new MusicFile
+      {
+        FileName = eventArgs.File.Name,
+        ArtistName = id3Tag.Artist,
+        AlbumName = id3Tag.Album,
+        Genre = id3Tag.Genre,
+        SongTitle = id3Tag.Title,
+      };
+
+      MusicFileLoaded(this, new MusicFileLoadedEventArgs(musicFile));
+    }
+
+    public event EventHandler<MusicFileLoadedEventArgs> MusicFileLoaded;
+    public event EventHandler<AllFilesLoadedEventArgs> AllMusicFilesLoaded;
   }
 }
