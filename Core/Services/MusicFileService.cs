@@ -31,10 +31,11 @@ namespace Core.Services
 
         musicFiles.Add(new MusicFile
         {
+          FileName = file.Name,
           ArtistName = id3Tag.Artist,
           AlbumName = id3Tag.Album,
           Genre = id3Tag.Genre,
-          SongTitle = id3Tag.Title
+          SongTitle = id3Tag.Title,
         });
       }
 

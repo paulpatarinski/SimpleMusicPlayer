@@ -6,5 +6,17 @@
     public string AlbumName { get; set; }
     public string Genre { get; set; }
     public string SongTitle { get; set; }
+    public string FileName { get; set; }
+
+    public string MusicFileName
+    {
+      get
+      {
+        if (string.IsNullOrEmpty(SongTitle))
+          return FileName;
+
+        return SongTitle;
+      }
+    }
   }
 }

@@ -5,11 +5,15 @@
                xmlns:base="clr-namespace:Core.Pages.Base;assembly=Core"
                xmlns:codes="clr-namespace:Core.Helpers.Codes;assembly=Core"
                x:Class="Core.Pages.MainPage">
+  <base:BasePage.Resources>
+    <ResourceDictionary>
+    </ResourceDictionary>
+  </base:BasePage.Resources>
   <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Teal}">
     <ListView ItemsSource="{Binding MusicFiles}" >
     <ListView.ItemTemplate>
       <DataTemplate>
-        <TextCell Text="{Binding ArtistName}" Detail="{Binding SongTitle}"/>
+        <TextCell Text="{Binding ArtistName}" Detail="{Binding MusicFileName}"/>
         
         <!--<ViewCell>
           <StackLayout>
