@@ -6,6 +6,7 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Windows.Storage;
 using Autofac;
+using Core.Services;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WinPhone.Resources;
@@ -101,6 +102,10 @@ namespace WinPhone
     // Code to execute on Unhandled Exceptions
     private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
     {
+      Resolver.Resolve<IExceptionHandlingService>().Handle(e.ExceptionObject);
+
+      e.Handled = true;
+
       if (Debugger.IsAttached)
       {
         // An unhandled exception has occurred; break into the debugger
