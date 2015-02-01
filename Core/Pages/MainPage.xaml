@@ -9,29 +9,20 @@
     <ResourceDictionary>
     </ResourceDictionary>
   </base:BasePage.Resources>
-  <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Teal}">
-    <ListView ItemsSource="{Binding MusicFiles}" >
+  <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Black}">
+    <ListView ItemsSource="{Binding MusicFiles}" RowHeight="60">
     <ListView.ItemTemplate>
       <DataTemplate>
-        <TextCell Text="{Binding ArtistName}" Detail="{Binding MusicFileName}"/>
+        <!--<TextCell Text="{Binding MusicFileName}" TextColor="{x:Static codes:Colors.White}" Detail="{Binding ArtistName}" DetailColor="{x:Static codes:Colors.Gray}"/>-->
         
-        <!--<ViewCell>
-          <StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Text="{Binding ArtistName}"/>
-              <Label Text="{Binding AlbumName}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Label Text="{Binding Genre}"/>
-              <Label Text="{Binding SongTitle}"/>
-            </StackLayout>
+        <ViewCell>
+          <StackLayout Spacing="0" Padding="10,10,10,0">
+              <Label Text="{Binding MusicFileName}" TextColor="{x:Static codes:Colors.White}" FontSize="18" FontAttributes="Bold"/>
+              <Label Text="{Binding ArtistName}" TextColor="{x:Static codes:Colors.Gray}"/>
           </StackLayout>
-        </ViewCell>-->
+        </ViewCell>
       </DataTemplate>
     </ListView.ItemTemplate>  
     </ListView>
-    
-    <Button Text="Load Songs" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
-            Command="{Binding LoadSongsCommand}" IsEnabled="{Binding IsLoadButtonEnabled}" />
   </StackLayout>
 </base:BasePage>
