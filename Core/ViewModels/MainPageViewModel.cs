@@ -23,10 +23,13 @@ namespace Core.ViewModels
 
     private void MusicFileServiceOnMusicFilesLoaded(object sender, MusicFilesLoadedEventArgs eventArgs)
     {
-      foreach (var musicFile in eventArgs.MusicFiles)
+      Device.BeginInvokeOnMainThread(() =>
       {
-        MusicFiles.Add(musicFile);
-      }
+        foreach (var musicFile in eventArgs.MusicFiles)
+        {
+          MusicFiles.Add(musicFile);
+        }
+      });
 
       IsLoadButtonEnabled = true;
     }
