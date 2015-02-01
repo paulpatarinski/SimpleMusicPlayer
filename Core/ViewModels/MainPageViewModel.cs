@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Models;
 using Core.Services;
@@ -17,6 +19,7 @@ namespace Core.ViewModels
     {
       _musicFileService = musicFileService;
       _musicFileService.MusicFilesLoaded += MusicFileServiceOnMusicFilesLoaded;
+      IsLoadButtonEnabled = true;
     }
 
     private void MusicFileServiceOnMusicFilesLoaded(object sender, MusicFilesLoadedEventArgs eventArgs)
@@ -25,21 +28,39 @@ namespace Core.ViewModels
       {
         MusicFiles.Add(musicFile);
       }
+
+      IsLoadButtonEnabled = true;
     }
 
     public ObservableCollection<MusicFile> MusicFiles 
     {
       get { return _musicFiles ?? (_musicFiles = new ObservableCollection<MusicFile>()); }
-      set { SetField(ref _musicFiles, value); }
+      set { SetProperty(ref _musicFiles, value); }
+    }
+
+    private bool _isLoadButtonEnabled;
+
+    public bool IsLoadButtonEnabled
+    {
+      get { return _isLoadButtonEnabled; }
+      set
+      {
+        SetProperty(ref _isLoadButtonEnabled, value);
+      }
     }
 
     public ICommand LoadSongsCommand
     {
-      get { return _refreshCommand ?? (_refreshCommand = new Command(ExecuteLoadSongs)); }
+      get { return _refreshCommand ?? (_refreshCommand = new Command(async () =>
+      {
+
+        await ExecuteLoadSongs();
+      })); }
     }
 
-    public void ExecuteLoadSongs()
+    public async Task ExecuteLoadSongs()
     {
+      IsLoadButtonEnabled = false;
       IsBusy = true;
 
       _musicFileService.LoadMusicFiles();

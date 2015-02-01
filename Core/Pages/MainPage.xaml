@@ -9,7 +9,9 @@
     <ListView ItemsSource="{Binding MusicFiles}" >
     <ListView.ItemTemplate>
       <DataTemplate>
-        <ViewCell>
+        <TextCell Text="{Binding ArtistName}" Detail="{Binding SongTitle}"/>
+        
+        <!--<ViewCell>
           <StackLayout>
             <StackLayout Orientation="Horizontal">
               <Label Text="{Binding ArtistName}"/>
@@ -20,12 +22,12 @@
               <Label Text="{Binding SongTitle}"/>
             </StackLayout>
           </StackLayout>
-        </ViewCell>
+        </ViewCell>-->
       </DataTemplate>
     </ListView.ItemTemplate>  
     </ListView>
     
     <Button Text="Load Songs" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
-            Command="{Binding LoadSongsCommand}" />
+            Command="{Binding LoadSongsCommand}" IsEnabled="{Binding IsLoadButtonEnabled}" />
   </StackLayout>
 </base:BasePage>
