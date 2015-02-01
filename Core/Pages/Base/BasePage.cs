@@ -8,6 +8,7 @@ namespace Core.Pages.Base
     public BasePage()
     {
       this.SetBinding<BaseViewModel>(IsBusyProperty, vm => vm.IsBusy);
+      NavigationPage.SetHasNavigationBar(this, false);
     }
   }
 }
