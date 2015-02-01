@@ -42,7 +42,7 @@ namespace SimpleMusicPlayer.Android.Services
     {
       var rootDirectoryInfo = new DirectoryInfo(path);
 
-      var fileInfos = rootDirectoryInfo.EnumerateFiles().ToList();
+      var fileInfos = rootDirectoryInfo.EnumerateFiles("*.mp3").ToList();
 
       var directories = rootDirectoryInfo.EnumerateDirectories();
 
