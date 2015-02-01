@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Helpers.Codes;
 using Core.Models;
 using Core.Models.EventArgs;
 using Core.Services.Native;
@@ -20,7 +22,7 @@ namespace Core.Services
 
     public void LoadMusicFiles()
     {
-      _fileService.LoadFiles("*.mp3");
+      _fileService.LoadFiles(new List<FileType>{FileType.Mp3});
     }
 
     private void FileServiceOnAllFilesLoaded(object sender, AllFilesLoadedEventArgs e)

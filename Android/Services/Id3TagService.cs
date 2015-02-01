@@ -29,7 +29,7 @@ namespace SimpleMusicPlayer.Android.Services
             id3Tag.Album = tags.Album;
             id3Tag.Genre = tags.FirstGenre;
             id3Tag.Year = tags.Year.ToString();
-            id3Tag.Track = tags.Track.ToString();
+            id3Tag.TrackNumber = tags.Track.ToString();
           }
         });
       }

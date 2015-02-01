@@ -7,9 +7,11 @@ using System.Windows.Navigation;
 using Windows.Storage;
 using Autofac;
 using Core.Services;
+using Core.Services.Native;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WinPhone.Resources;
+using WinPhone.Services;
 using XLabs.Ioc;
 using XLabs.Ioc.Autofac;
 using XLabs.Platform.Device;
@@ -181,6 +183,9 @@ namespace WinPhone
 
       containerBuilder.Register(c => WindowsPhoneDevice.CurrentDevice).As<IDevice>();
       containerBuilder.Register(c => nativeApplication).As<IXFormsApp>();
+      containerBuilder.Register(c => new FileService()).As<IFileService>();
+      containerBuilder.Register(c => new Id3TagService()).As<IId3TagService>();
+
       Core.App.RegisterCoreComponents(containerBuilder);
 
       var autofacContainer = new AutofacContainer(containerBuilder.Build());

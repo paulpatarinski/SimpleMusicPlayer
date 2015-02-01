@@ -7,6 +7,6 @@
     public string Album { get; set; }
     public string Genre { get; set; }
     public string Year { get; set; }
-    public string Track { get; set; }
+    public string TrackNumber { get; set; }
   }
 }

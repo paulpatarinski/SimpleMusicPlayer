@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Helpers.Codes;
 using Core.Models.EventArgs;
 
 namespace Core.Services.Native
@@ -7,6 +9,6 @@ namespace Core.Services.Native
   {
     event EventHandler<FileLoadedEventArgs> FileLoaded;
     event EventHandler<AllFilesLoadedEventArgs> AllFilesLoaded;
-    void LoadFiles(string searchPattern);
+    void LoadFiles(List<FileType> fileTypes);
   }
 }

@@ -27,6 +27,8 @@ namespace Core.ViewModels
     private void MusicFileServiceOnAllMusicFilesLoaded(object sender, AllFilesLoadedEventArgs eventArgs)
     {
       Debug.WriteLine(eventArgs.NumberOfFiles);
+
+      IsBusy = false;
     }
 
     private void MusicFileServiceOnMusicFileLoaded(object sender, MusicFileLoadedEventArgs eventArgs)
@@ -49,7 +51,6 @@ namespace Core.ViewModels
 
       _musicFileService.LoadMusicFiles();
 
-      IsBusy = false;
     }
   }
 }

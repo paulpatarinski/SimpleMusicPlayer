@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Models;
+using Core.Helpers.Codes;
 using Core.Models.EventArgs;
 using Core.Services;
 using Core.Services.Native;
@@ -16,7 +17,7 @@ namespace SimpleMusicPlayer.Android.Services
     public event EventHandler<FileLoadedEventArgs> FileLoaded;
     public event EventHandler<AllFilesLoadedEventArgs> AllFilesLoaded;
 
-    public void LoadFiles(string searchPattern)
+    public void LoadFiles(List<FileType> fileTypes)
     {
       if (FileLoaded == null)
         throw new Exception("You must subscribe to FileLoaded");
@@ -31,7 +32,7 @@ namespace SimpleMusicPlayer.Android.Services
           var root = Environment.CurrentDirectory;
           var documentsPath = Path.Combine(root, "storage/emulated/0/Music");
 
-          var numberOfFilesLoaded = LoadFilesRecursiveAsync(documentsPath, searchPattern);
+          var numberOfFilesLoaded = LoadFilesRecursiveAsync(documentsPath, ConvertFileTypesToSearchPattern(fileTypes));
 
           AllFilesLoaded(this, new AllFilesLoadedEventArgs(numberOfFilesLoaded));
         });
@@ -40,6 +41,12 @@ namespace SimpleMusicPlayer.Android.Services
       {
         Resolver.Resolve<IExceptionHandlingService>().Handle(ex);
       }
+    }
+
+    private string ConvertFileTypesToSearchPattern(List<FileType> fileTypes)
+    {
+      //todo Handle other file types
+      return "*.mp3";
     }
 
     private int LoadFilesRecursiveAsync(string path, string searchPattern)

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Helpers\Codes\Colors.cs" />
+    <Compile Include="Helpers\Codes\FileType.cs" />
     <Compile Include="Models\EventArgs\AllFilesLoadedEventArgs.cs" />
     <Compile Include="Models\EventArgs\FileLoadedEventArgs.cs" />
     <Compile Include="Models\Id3Tag.cs" />
