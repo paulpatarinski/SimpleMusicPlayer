@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Core.Models
+﻿namespace Core.Models.EventArgs
 {
-  public class AllFilesLoadedEventArgs : EventArgs
+  public class AllFilesLoadedEventArgs : System.EventArgs
   {
     public int NumberOfFiles { get; private set; }
 

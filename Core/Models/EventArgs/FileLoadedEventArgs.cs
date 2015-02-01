@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Core.Models
+﻿namespace Core.Models.EventArgs
 {
-  public class FileLoadedEventArgs : EventArgs
+  public class FileLoadedEventArgs : System.EventArgs
   {
     public readonly File File;
 

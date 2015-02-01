@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Core.Helpers.Codes;
 using Core.Helpers.Controls;
-using WinPhone;
+using WinPhone.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
 using Button = Xamarin.Forms.Button;
@@ -19,7 +19,7 @@ using Thickness = System.Windows.Thickness;
 
 [assembly: ExportRenderer(typeof (ImageButton), typeof (ImageButtonRenderer))]
 
-namespace WinPhone
+namespace WinPhone.Renderers
 {
   /// <summary>
   ///   Draws a button on the Windows Phone platform with the image shown in the right

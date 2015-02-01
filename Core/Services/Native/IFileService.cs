@@ -1,7 +1,7 @@
 ﻿using System;
-using Core.Models;
+using Core.Models.EventArgs;
 
-namespace Core.Services
+namespace Core.Services.Native
 {
   public interface IFileService
   {

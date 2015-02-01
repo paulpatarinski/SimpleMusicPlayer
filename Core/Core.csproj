@@ -33,11 +33,11 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Helpers\Codes\Colors.cs" />
-    <Compile Include="Models\AllFilesLoadedEventArgs.cs" />
-    <Compile Include="Models\FileLoadedEventArgs.cs" />
+    <Compile Include="Models\EventArgs\AllFilesLoadedEventArgs.cs" />
+    <Compile Include="Models\EventArgs\FileLoadedEventArgs.cs" />
     <Compile Include="Models\Id3Tag.cs" />
     <Compile Include="Models\MusicFile.cs" />
-    <Compile Include="Models\MusicFileLoadedEventArgs.cs" />
+    <Compile Include="Models\EventArgs\MusicFileLoadedEventArgs.cs" />
     <Compile Include="Services\ExceptionHandlingService.cs" />
     <Compile Include="Services\IExceptionHandlingService.cs" />
     <Compile Include="Services\Native\IFileService.cs" />

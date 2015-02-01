@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
+using Core.Models.EventArgs;
 using Core.Services.Native;
 
 namespace Core.Services

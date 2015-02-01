@@ -3,9 +3,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
+using Core.Models.EventArgs;
 using Core.Services;
+using Core.Services.Native;
 using XLabs.Ioc;
-using File = Core.Models.File;
+using File = Core.Models.EventArgs.File;
 
 namespace SimpleMusicPlayer.Android.Services
 {

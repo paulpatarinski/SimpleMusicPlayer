@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Core.Models
+﻿namespace Core.Models.EventArgs
 {
-  public class MusicFileLoadedEventArgs : EventArgs
+  public class MusicFileLoadedEventArgs : System.EventArgs
   {
     public MusicFile MusicFile { get; private set; }
 

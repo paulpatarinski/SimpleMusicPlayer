@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Core.Models;
+using Core.Models.EventArgs;
 
 namespace Core.Services.Native
 {

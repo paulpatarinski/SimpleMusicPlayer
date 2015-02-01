@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Models;
+using Core.Models.EventArgs;
 using Core.Services;
 using Core.ViewModels.Base;
 using Xamarin.Forms;
