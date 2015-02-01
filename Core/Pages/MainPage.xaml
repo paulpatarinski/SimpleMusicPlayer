@@ -10,7 +10,7 @@
     </ResourceDictionary>
   </base:BasePage.Resources>
   <StackLayout VerticalOptions="Fill" BackgroundColor="{x:Static codes:Colors.Black}">
-    <ListView ItemsSource="{Binding MusicFiles}">
+    <ListView x:Name="musicFilesListView" ItemsSource="{Binding MusicFiles}">
      <ListView.RowHeight>
        <OnPlatform x:TypeArguments="x:Int32">
          <OnPlatform.Android>

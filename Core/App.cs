@@ -22,6 +22,7 @@ namespace Core
     public static Page GetMainPage()
     {
       ViewFactory.Register<MainPage, MainPageViewModel>();
+      ViewFactory.Register<MusicPlayerPage, MusicPlayerViewModel>();
 
       var landingPage = (Page) ViewFactory.CreatePage<MainPageViewModel, MainPage>((model, page) =>
       {
