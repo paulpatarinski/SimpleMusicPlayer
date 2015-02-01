@@ -5,6 +5,6 @@ namespace Core.Services.Native
 {
   public interface IId3TagService
   {
-    Task<Id3Tag> GetId3TagAsync(string musicFilePath);
+    Task<Id3Tag> GetId3TagAsync(File file);
   }
 }

@@ -1,29 +1,37 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
-using Android.Media;
 using Core.Models;
 using Core.Services.Native;
+using TagLib;
+using File = Core.Models.File;
 
 namespace SimpleMusicPlayer.Android.Services
 {
   public class Id3TagService : IId3TagService
   {
-    public async Task<Id3Tag> GetId3TagAsync(string musicFilePath)
+    public async Task<Id3Tag> GetId3TagAsync(File file)
     {
       var id3Tag = new Id3Tag();
 
       try
       {
-        var reader = new MediaMetadataRetriever();
+        await Task.Run(() =>
+        {
+          using (var fileStream = new FileStream(file.Path, FileMode.OpenOrCreate))
+          {
+            var tagFile = TagLib.File.Create(new StreamFileAbstraction(file.Name, fileStream, fileStream));
 
-        reader.SetDataSource(musicFilePath);
+            var tags = tagFile.GetTag(TagTypes.Id3v2);
 
-        id3Tag.Artist = reader.ExtractMetadata(MetadataKey.Artist);
-        id3Tag.Title = reader.ExtractMetadata(MetadataKey.Title);
-        id3Tag.Album = reader.ExtractMetadata(MetadataKey.Album);
-        id3Tag.Genre = reader.ExtractMetadata(MetadataKey.Genre);
-        id3Tag.Year = reader.ExtractMetadata(MetadataKey.Year);
-        id3Tag.Track = reader.ExtractMetadata(MetadataKey.NumTracks);
+            id3Tag.Artist = string.IsNullOrEmpty(tags.FirstPerformer) ? tags.FirstAlbumArtist : tags.FirstPerformer;
+            id3Tag.Title = tags.Title;
+            id3Tag.Album = tags.Album;
+            id3Tag.Genre = tags.FirstGenre;
+            id3Tag.Year = tags.Year.ToString();
+            id3Tag.Track = tags.Track.ToString();
+          }
+        });
       }
       catch (Exception ex)
       {

@@ -27,7 +27,7 @@ namespace Core.Services
 
       foreach (var file in eventArgs.Files)
       {
-        var id3Tag = await _id3TagService.GetId3TagAsync(file.Path);
+        var id3Tag = await _id3TagService.GetId3TagAsync(file);
 
         musicFiles.Add(new MusicFile
         {
