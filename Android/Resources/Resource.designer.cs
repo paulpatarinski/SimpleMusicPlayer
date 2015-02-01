@@ -26,6 +26,7 @@ namespace SimpleMusicPlayer.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::XamSvg.Resource.String.library_name = global::SimpleMusicPlayer.Android.Resource.String.library_name;
 			global::XLabs.Forms.Resource.Color.calendar_active_month_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_active_month_bg;
 			global::XLabs.Forms.Resource.Color.calendar_bg = global::SimpleMusicPlayer.Android.Resource.Color.calendar_bg;
 			global::XLabs.Forms.Resource.Color.calendar_divider = global::SimpleMusicPlayer.Android.Resource.Color.calendar_divider;

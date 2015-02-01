@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using System.Linq;
+using Core.Models;
 using Core.Pages.Base;
 using Core.ViewModels;
 using Xamarin.Forms;
@@ -19,7 +20,10 @@ namespace Core.Pages
     {
       var musicPlayerPage = (Page) ViewFactory.CreatePage<MusicPlayerViewModel, MusicPlayerPage>((model, page) =>
       {
-        model.Init((MusicFile) selectedItemChangedEventArgs.SelectedItem);
+        var mainPageViewModel = BindingContext as MainPageViewModel;
+
+        if (mainPageViewModel != null)
+          model.Init((MusicFile) selectedItemChangedEventArgs.SelectedItem, mainPageViewModel.MusicFiles.ToList());
       });
 
       await Navigation.PushAsync(musicPlayerPage);

@@ -1,4 +1,6 @@
-﻿using Core.Models;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Core.Models;
 using Core.Services.Native;
 using Core.ViewModels.Base;
 using Xamarin.Forms;
@@ -14,25 +16,28 @@ namespace Core.ViewModels
       _mediaPlayerService = mediaPlayerService;
     }
 
-    private MusicFile _musicFile;
+    private MusicFile _selectedMusicFile;
 
-    public MusicFile MusicFile
+    public MusicFile SelectedMusicFile
     {
-      get { return _musicFile; }
+      get { return _selectedMusicFile; }
       set
       {
-        SetProperty(ref _musicFile, value); 
+        SetProperty(ref _selectedMusicFile, value);
+        ExecutePlay(SelectedMusicFile);
       }
     }
 
-    public void Init(MusicFile selectedMusicFile)
+    public void Init(MusicFile selectedMusicFile, List<MusicFile> musicFiles)
     {
-      MusicFile = selectedMusicFile;
-
-      ExecutePlay(MusicFile);
+      SelectedMusicFile = selectedMusicFile;
+      _musicFiles = musicFiles;
     }
 
     private Command _togglePlayPauseCommand;
+    private List<MusicFile> _musicFiles;
+    private Command _playPreviousSongCommand;
+    private Command _playNextSongCommand;
 
     public Command TogglePlayPauseCommand
     {
@@ -52,10 +57,67 @@ namespace Core.ViewModels
       }
     }
 
+    public Command PlayPreviousSongCommand
+    {
+      get
+      {
+        return _playPreviousSongCommand ?? (_playPreviousSongCommand = new Command(async () =>
+        {
+         ExecutePlayPrevious();
+        }));
+      }
+    }
+
+    public Command PlayNextSongCommand
+    {
+      get
+      {
+        return _playNextSongCommand ?? (_playNextSongCommand = new Command(async () =>
+        {
+          ExecutePlayNext();
+        }));
+      }
+    }
+
+    public Assembly SvgAssembly
+    {
+      get { return typeof (App).GetTypeInfo().Assembly; }
+    }
+
+    public string PlayButtonPath
+    {
+      get { return "Core.Images.PlayButton.svg"; }
+    }
+
     private void ExecutePlay(MusicFile musicFileToPlay)
     {
       _mediaPlayerService.Play(musicFileToPlay.FileName, musicFileToPlay.FilePath);
+    }
 
+    private void ExecutePlayNext()
+    {
+      var currentMusicFileIndex = _musicFiles.IndexOf(SelectedMusicFile);
+      var nextSongIndex = currentMusicFileIndex + 1;
+
+      if (nextSongIndex > _musicFiles.Count)
+      {
+        nextSongIndex = 0;
+      }
+
+      SelectedMusicFile = _musicFiles[nextSongIndex];
+    }
+
+    private void ExecutePlayPrevious()
+    {
+      var currentMusicFileIndex = _musicFiles.IndexOf(SelectedMusicFile);
+      var previousSongIndex = currentMusicFileIndex - 1;
+
+      if (previousSongIndex < 0)
+      {
+        previousSongIndex = _musicFiles.Count - 1;
+      }
+
+      SelectedMusicFile = _musicFiles[previousSongIndex];
     }
 
     private void ExecuteResume()

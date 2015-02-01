@@ -7,6 +7,7 @@ using Core;
 using Core.Services;
 using Core.Services.Native;
 using SimpleMusicPlayer.Android.Services;
+using SVG.Forms.Plugin.Droid;
 using Xamarin.Forms;
 using XLabs.Forms;
 using XLabs.Ioc;
@@ -40,6 +41,7 @@ namespace SimpleMusicPlayer.Android
       }
 
       Forms.Init(this, bundle);
+      SvgImageRenderer.Init();
 
       App.Init();
 

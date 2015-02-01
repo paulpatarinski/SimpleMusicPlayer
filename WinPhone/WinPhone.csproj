@@ -172,6 +172,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="SVG.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.11\lib\wp8\SVG.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="SVG.Forms.Plugin.WindowsPhone">
+      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.11\lib\wp8\SVG.Forms.Plugin.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="WPControls">
       <HintPath>..\packages\WPControls.1.5.2\lib\wp8\WPControls.dll</HintPath>
     </Reference>
