@@ -23,7 +23,10 @@ namespace Core
     {
       ViewFactory.Register<MainPage, MainPageViewModel>();
 
-      var landingPage = (Page) ViewFactory.CreatePage<MainPageViewModel, MainPage>();
+      var landingPage = (Page) ViewFactory.CreatePage<MainPageViewModel, MainPage>((model, page) =>
+      {
+        model.LoadSongs();
+      });
 
       var mainNavigationPage = new NavigationPage(landingPage);
 

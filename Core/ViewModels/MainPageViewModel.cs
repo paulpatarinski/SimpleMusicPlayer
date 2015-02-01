@@ -22,7 +22,6 @@ namespace Core.ViewModels
       _musicFileService = musicFileService;
       _musicFileService.MusicFileLoaded += MusicFileServiceOnMusicFileLoaded;
       _musicFileService.AllMusicFilesLoaded += MusicFileServiceOnAllMusicFilesLoaded;
-      LoadSongs();
     }
 
     private void MusicFileServiceOnAllMusicFilesLoaded(object sender, AllFilesLoadedEventArgs eventArgs)
