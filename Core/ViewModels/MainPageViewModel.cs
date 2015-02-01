@@ -22,12 +22,11 @@ namespace Core.ViewModels
       _musicFileService = musicFileService;
       _musicFileService.MusicFileLoaded += MusicFileServiceOnMusicFileLoaded;
       _musicFileService.AllMusicFilesLoaded += MusicFileServiceOnAllMusicFilesLoaded;
-      IsLoadButtonEnabled = true;
+      LoadSongs();
     }
 
     private void MusicFileServiceOnAllMusicFilesLoaded(object sender, AllFilesLoadedEventArgs eventArgs)
     {
-      IsLoadButtonEnabled = true;
       Debug.WriteLine(eventArgs.NumberOfFiles);
     }
 
@@ -45,29 +44,8 @@ namespace Core.ViewModels
       set { SetProperty(ref _musicFiles, value); }
     }
 
-    private bool _isLoadButtonEnabled;
-
-    public bool IsLoadButtonEnabled
+    public void LoadSongs()
     {
-      get { return _isLoadButtonEnabled; }
-      set
-      {
-        SetProperty(ref _isLoadButtonEnabled, value);
-      }
-    }
-
-    public ICommand LoadSongsCommand
-    {
-      get { return _refreshCommand ?? (_refreshCommand = new Command(async () =>
-      {
-
-        await ExecuteLoadSongs();
-      })); }
-    }
-
-    public async Task ExecuteLoadSongs()
-    {
-      IsLoadButtonEnabled = false;
       IsBusy = true;
 
       _musicFileService.LoadMusicFiles();
