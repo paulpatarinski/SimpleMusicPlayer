@@ -2,6 +2,7 @@
 using System.Reflection;
 using Autofac;
 using Core.Pages;
+using Core.Services;
 using Core.ViewModels;
 using Xamarin.Forms;
 using XLabs.Forms.Mvvm;
@@ -37,8 +38,8 @@ namespace Core
       };
 
       containerBuilder.RegisterAssemblyTypes(assemblies)
-        .Where(clss => clss.Name.EndsWith("Service"))
-        .AsImplementedInterfaces();
+        .Where(clss => clss.Name.EndsWith("Service")).AsImplementedInterfaces()
+        .Except<ExceptionHandlingService>(ehs => ehs.As<IExceptionHandlingService>().SingleInstance());
     }
 
     /// <summary>

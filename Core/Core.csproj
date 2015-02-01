@@ -37,6 +37,8 @@
     <Compile Include="Models\Id3Tag.cs" />
     <Compile Include="Models\MusicFile.cs" />
     <Compile Include="Models\MusicFilesLoadedEventArgs.cs" />
+    <Compile Include="Services\ExceptionHandlingService.cs" />
+    <Compile Include="Services\IExceptionHandlingService.cs" />
     <Compile Include="Services\Native\IFileService.cs" />
     <Compile Include="Services\IMusicFileService.cs" />
     <Compile Include="Services\Native\IId3TagService.cs" />

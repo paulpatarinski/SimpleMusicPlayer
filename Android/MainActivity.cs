@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using Autofac;
 using Core;
 using Core.Services;
@@ -26,6 +27,8 @@ namespace SimpleMusicPlayer.Android
     {
       base.OnCreate(bundle);
 
+      AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironmentOnUnhandledExceptionRaiser;
+
       if (!Resolver.IsSet)
       {
         SetIoc();
@@ -43,6 +46,12 @@ namespace SimpleMusicPlayer.Android
       LoadApplication(new App());
     }
 
+    private void AndroidEnvironmentOnUnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs raiseThrowableEventArgs)
+    {
+      Resolver.Resolve<IExceptionHandlingService>().Handle(raiseThrowableEventArgs.Exception);
+      raiseThrowableEventArgs.Handled = true; 
+    }
+
     /// <summary>
     ///   Sets the IoC.
     /// </summary>
@@ -58,7 +67,7 @@ namespace SimpleMusicPlayer.Android
       containerBuilder.Register(c => new FileService()).As<IFileService>();
       containerBuilder.Register(c => new Id3TagService()).As<IId3TagService>();
 
-      Core.App.RegisterCoreComponents(containerBuilder);
+      App.RegisterCoreComponents(containerBuilder);
 
       var autofacContainer = new AutofacContainer(containerBuilder.Build());
       autofacContainer.Register<IDependencyContainer>(autofacContainer);
