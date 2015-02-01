@@ -48,6 +48,7 @@
     <Compile Include="Services\Native\IFileService.cs" />
     <Compile Include="Services\IMusicFileService.cs" />
     <Compile Include="Services\Native\IId3TagService.cs" />
+    <Compile Include="Services\Native\IMediaPlayerService.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Pages\Base\BasePage.cs" />

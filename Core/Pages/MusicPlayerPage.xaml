@@ -26,7 +26,10 @@
       <Label Text="{Binding MusicFile.SongTitle}" TextColor="{x:Static codes:Colors.White}" Font="{x:Static codes:Fonts.LargeBold}"/>
       <Label Text="{Binding MusicFile.AlbumName}" TextColor="{x:Static codes:Colors.Gray}"/>
     </StackLayout>
-
+  </Grid>
+  
+  <Grid Grid.Row="2" Grid.Column="0">
+    <Button Text="Play" HorizontalOptions="Center" Command="{Binding TogglePlayPauseCommand}"/>
   </Grid>
   
 </Grid>

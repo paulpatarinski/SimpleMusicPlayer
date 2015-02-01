@@ -66,6 +66,7 @@ namespace SimpleMusicPlayer.Android
       containerBuilder.Register(c => nativeApplication).As<IXFormsApp>();
       containerBuilder.Register(c => new FileService()).As<IFileService>();
       containerBuilder.Register(c => new Id3TagService()).As<IId3TagService>();
+      containerBuilder.Register(c => new MediaPlayerService()).As<IMediaPlayerService>();
 
       App.RegisterCoreComponents(containerBuilder);
 

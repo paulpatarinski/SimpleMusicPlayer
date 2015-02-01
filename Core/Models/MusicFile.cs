@@ -7,6 +7,7 @@
     public string Genre { get; set; }
     public string SongTitle { get; set; }
     public string FileName { get; set; }
+    public string FilePath { get; set; }
 
     public string MusicFileName
     {
@@ -18,5 +19,6 @@
         return SongTitle;
       }
     }
+
   }
 }

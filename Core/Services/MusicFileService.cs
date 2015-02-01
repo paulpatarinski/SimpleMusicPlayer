@@ -43,6 +43,7 @@ namespace Core.Services
       var musicFile = new MusicFile
       {
         FileName = eventArgs.File.Name,
+        FilePath = eventArgs.File.Path,
         ArtistName = id3Tag.Artist,
         AlbumName = id3Tag.Album,
         Genre = id3Tag.Genre,
