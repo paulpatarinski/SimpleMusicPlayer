@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Core.Models;
 using Core.Services.Native;
@@ -14,6 +15,12 @@ namespace Core.ViewModels
     public MusicPlayerViewModel(IMediaPlayerService mediaPlayerService)
     {
       _mediaPlayerService = mediaPlayerService;
+      _mediaPlayerService.Completion += MediaPlayerServiceOnCompletion;
+    }
+
+    private void MediaPlayerServiceOnCompletion(object sender, EventArgs eventArgs)
+    {
+      ExecutePlayNext();
     }
 
     private MusicFile _selectedMusicFile;

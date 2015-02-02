@@ -1,3 +1,4 @@
+using System;
 using Android.Media;
 using Core.Services.Native;
 
@@ -5,6 +6,19 @@ namespace SimpleMusicPlayer.Android.Services
 {
   public class MediaPlayerService : IMediaPlayerService
   {
+    public MediaPlayerService()
+    {
+      MediaPlayer.Completion += MediaPlayerOnCompletion;  
+    }
+
+    public event EventHandler Completion;
+
+    private void MediaPlayerOnCompletion(object sender, EventArgs eventArgs)
+    {
+      if (Completion != null) 
+          Completion(sender, eventArgs);
+    }
+
     private static MediaPlayer _mediaPlayer;
 
     public static MediaPlayer MediaPlayer
@@ -44,5 +58,6 @@ namespace SimpleMusicPlayer.Android.Services
     {
       get { return MediaPlayer.IsPlaying; }
     }
+
   }
 }

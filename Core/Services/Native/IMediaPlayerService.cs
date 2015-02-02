@@ -1,4 +1,6 @@
-﻿namespace Core.Services.Native
+﻿using System;
+
+namespace Core.Services.Native
 {
   public interface IMediaPlayerService
   {
@@ -8,5 +10,6 @@
     void Stop();
     void Release();
     bool IsPlaying { get; }
+    event EventHandler Completion;
   }
 }
