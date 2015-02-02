@@ -31,8 +31,8 @@
   
   <Grid x:Name="musicPlayerControlsGrid" Grid.Row="2" Grid.Column="0">
     <Grid.RowDefinitions>
-      <RowDefinition Height="0.9*"/>
-      <RowDefinition Height="0.1*"/>
+      <RowDefinition Height="0.8*"/>
+      <RowDefinition Height="0.2*"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="0.2*"/>

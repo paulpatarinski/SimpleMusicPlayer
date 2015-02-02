@@ -39,12 +39,31 @@ namespace Core.ViewModels
     {
       SelectedMusicFile = selectedMusicFile;
       _musicFiles = musicFiles;
+      IsPlayBtnVisibile = false;
+      IsPauseBtnVisible = true;
     }
 
     private Command _togglePlayPauseCommand;
     private List<MusicFile> _musicFiles;
     private Command _playPreviousSongCommand;
     private Command _playNextSongCommand;
+
+
+    private bool _isPlayBtnVisibile;
+
+    public bool IsPlayBtnVisibile
+    {
+      get { return _isPlayBtnVisibile; }
+      set { SetProperty(ref _isPlayBtnVisibile, value); }
+    }
+
+    private bool _isPauseBtnVisible;
+
+    public bool IsPauseBtnVisible
+    {
+      get { return _isPauseBtnVisible; }
+      set { SetProperty(ref _isPauseBtnVisible, value); }
+    }
 
     public Command TogglePlayPauseCommand
     {
@@ -55,10 +74,14 @@ namespace Core.ViewModels
           if (_mediaPlayerService.IsPlaying)
           {
             ExecutePause();
+            IsPlayBtnVisibile = true;
+            IsPauseBtnVisible = false;
           }
           else
           {
             ExecuteResume();
+            IsPlayBtnVisibile = false;
+            IsPauseBtnVisible = true;
           }
         }));
       }
