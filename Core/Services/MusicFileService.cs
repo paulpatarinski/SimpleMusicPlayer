@@ -48,6 +48,7 @@ namespace Core.Services
         AlbumName = id3Tag.Album,
         Genre = id3Tag.Genre,
         SongTitle = id3Tag.Title,
+        AlbumArt = id3Tag.AlbumArt
       };
 
       MusicFileLoaded(this, new MusicFileLoadedEventArgs(musicFile));

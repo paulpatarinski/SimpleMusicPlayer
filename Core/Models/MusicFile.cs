@@ -1,4 +1,6 @@
-﻿namespace Core.Models
+﻿using Xamarin.Forms;
+
+namespace Core.Models
 {
   public class MusicFile
   {
@@ -8,6 +10,7 @@
     public string SongTitle { get; set; }
     public string FileName { get; set; }
     public string FilePath { get; set; }
+    public ImageSource AlbumArt { get; set; }
 
     public string MusicFileName
     {

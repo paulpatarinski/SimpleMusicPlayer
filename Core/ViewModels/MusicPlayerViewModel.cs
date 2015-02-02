@@ -129,7 +129,7 @@ namespace Core.ViewModels
       var currentMusicFileIndex = _musicFiles.IndexOf(SelectedMusicFile);
       var nextSongIndex = currentMusicFileIndex + 1;
 
-      if (nextSongIndex > _musicFiles.Count)
+      if (nextSongIndex > _musicFiles.Count - 1)
       {
         nextSongIndex = 0;
       }

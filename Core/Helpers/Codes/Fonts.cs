@@ -4,6 +4,29 @@ namespace Core.Helpers.Codes
 {
   public static class Fonts
   {
+    public static Font ExtraLargeBold
+    {
+      get
+      {
+        var font = Font.Default;
+
+        Device.OnPlatform(iOS: () =>
+        {
+          font = Font.SystemFontOfSize(NamedSize.Large, FontAttributes.Bold);
+        },
+          Android: () =>
+          {
+            font = Font.SystemFontOfSize(22, FontAttributes.Bold);
+          },
+          WinPhone: () =>
+          {
+            font = Font.SystemFontOfSize(24, FontAttributes.Bold);
+          });
+
+        return font;
+      }
+    }
+
     public static Font LargeBold
     {
       get

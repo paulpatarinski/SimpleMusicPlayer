@@ -3,48 +3,67 @@
 					   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 					   xmlns:base="clr-namespace:Core.Pages.Base;assembly=Core"
 					   xmlns:codes="clr-namespace:Core.Helpers.Codes;assembly=Core"
-					   xmlns:abstractions="clr-namespace:SVG.Forms.Plugin.Abstractions;assembly=SVG.Forms.Plugin.Abstractions"
+             xmlns:valueConverters="clr-namespace:Core.Helpers.ValueConverters;assembly=Core"
 					   x:Class="Core.Pages.MusicPlayerPage">
-<Grid BackgroundColor="{x:Static codes:Colors.Black}" Padding="0,5,0,0">
+
+  <base:BasePage.Resources>
+    <ResourceDictionary>
+    <valueConverters:EllipsesStringValueConverter x:Key="EllipsesStringValueConverter" />
+    </ResourceDictionary>
+  </base:BasePage.Resources>
+  <Grid BackgroundColor="{x:Static codes:Colors.Black}" Padding="0,5,0,0">
+ 
   <Grid.RowDefinitions>
-    <RowDefinition Height="0.2*"/>
-    <RowDefinition Height="0.6*"/>
-    <RowDefinition Height="0.2*"/>
+    <RowDefinition Height="0.75*"/>
+    <RowDefinition Height="0.25*"/>
   </Grid.RowDefinitions>
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width="*"/>
   </Grid.ColumnDefinitions>
-  <Grid Grid.Row="0" Grid.Column="0">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="0.1*"/>
-      <ColumnDefinition Width="0.9*"/>
-    </Grid.ColumnDefinitions>
-    <StackLayout Grid.Row="0" Grid.Column="1" Spacing="0">
-      <Label Text="{Binding SelectedMusicFile.ArtistName}" TextColor="{x:Static codes:Colors.Gray}"/>
-      <Label Text="{Binding SelectedMusicFile.SongTitle}" TextColor="{x:Static codes:Colors.White}" Font="{x:Static codes:Fonts.LargeBold}"/>
-      <Label Text="{Binding SelectedMusicFile.AlbumName}" TextColor="{x:Static codes:Colors.Gray}"/>
-    </StackLayout>
-  </Grid>
   
-  <Grid x:Name="musicPlayerControlsGrid" Grid.Row="2" Grid.Column="0">
+  <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Aspect="Fill" Source="{Binding SelectedMusicFile.AlbumArt}"/>
+ 
+  <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="{x:Static codes:Colors.TransparentBlack}">
     <Grid.RowDefinitions>
-      <RowDefinition Height="0.8*"/>
-      <RowDefinition Height="0.2*"/>
+      <RowDefinition Height="0.3*"/>
+      <RowDefinition Height="0.7*"/>
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="0.2*"/>
-      <ColumnDefinition Width="0.15*"/>
-      <ColumnDefinition Width="0.3*"/>
-      <ColumnDefinition Width="0.15*"/>
-      <ColumnDefinition Width="0.2*"/>
+      <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
-    <!--<abstractions:SvgImage SvgAssembly="{Binding SvgAssembly}" SvgPath="{Binding PlayButtonPath}" HeightRequest="100" WidthRequest="100"></abstractions:SvgImage>-->
-    <Button Grid.Row="0" Grid.Column="1" Text="Previous" HorizontalOptions="Center" Command="{Binding PlayPreviousSongCommand}"/>
-    <Button Grid.Row="0" Grid.Column="3" Text="Next" HorizontalOptions="Center" Command="{Binding PlayNextSongCommand}"/>
+    
+    <Grid Grid.Row="0" Grid.Column="0" >
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <StackLayout Grid.Row="0" Grid.Column="0" Spacing="0" HorizontalOptions="Center">
+        <Label Text="{Binding SelectedMusicFile.ArtistName, Converter={StaticResource EllipsesStringValueConverter}, ConverterParameter=30}" TextColor="{x:Static codes:Colors.White}" HorizontalOptions="Center" Font="{x:Static codes:Fonts.ExtraLargeBold}"/>
+        <Label Text="{Binding SelectedMusicFile.SongTitle, Converter={StaticResource EllipsesStringValueConverter}, ConverterParameter=40}" TextColor="{x:Static codes:Colors.White}" HorizontalOptions="Center" Font="{x:Static codes:Fonts.Large}"/>
+      </StackLayout>
+    </Grid>
+
+    <Grid x:Name="musicPlayerControlsGrid" Grid.Row="1" Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.05*"/>
+        <RowDefinition Height="0.95*"/>
+        <RowDefinition Height="0.05*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.2*"/>
+        <ColumnDefinition Width="0.15*"/>
+        <ColumnDefinition Width="0.05*"/>
+        <ColumnDefinition Width="0.2*"/>
+        <ColumnDefinition Width="0.05*"/>
+        <ColumnDefinition Width="0.15*"/>
+        <ColumnDefinition Width="0.2*"/>
+      </Grid.ColumnDefinitions>
+    </Grid>
+    
   </Grid>
+ 
   
 </Grid>
   

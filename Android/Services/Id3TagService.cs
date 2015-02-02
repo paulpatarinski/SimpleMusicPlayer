@@ -1,9 +1,11 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Services.Native;
 using TagLib;
+using Xamarin.Forms;
 using File = Core.Models.EventArgs.File;
 
 namespace SimpleMusicPlayer.Android.Services
@@ -30,6 +32,10 @@ namespace SimpleMusicPlayer.Android.Services
             id3Tag.Genre = tags.FirstGenre;
             id3Tag.Year = tags.Year.ToString();
             id3Tag.TrackNumber = tags.Track.ToString();
+            
+            var picture = tags.Pictures[0];
+
+            id3Tag.AlbumArt = ImageSource.FromStream(() => GetImageMemoryStream(picture));
           }
         });
       }
@@ -39,6 +45,11 @@ namespace SimpleMusicPlayer.Android.Services
       }
 
       return await Task.FromResult(id3Tag);
+    }
+
+    private Stream GetImageMemoryStream(IPicture picture)
+    {
+      return new MemoryStream(picture.Data.Data);
     }
   }
 }
