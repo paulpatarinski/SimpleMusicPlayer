@@ -12,7 +12,7 @@
     <valueConverters:EllipsesStringValueConverter x:Key="EllipsesStringValueConverter" />
     </ResourceDictionary>
   </base:BasePage.Resources>
-  <Grid BackgroundColor="{x:Static codes:Colors.Black}" Padding="0,5,0,0">
+  <Grid BackgroundColor="{x:Static codes:Colors.Black}">
  
   <Grid.RowDefinitions>
     <RowDefinition Height="0.75*"/>
@@ -21,9 +21,40 @@
   <Grid.ColumnDefinitions>
     <ColumnDefinition Width="*"/>
   </Grid.ColumnDefinitions>
+
+    <Grid Grid.Row="0" Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="0.9*"/>
+        <RowDefinition Height="0.1*"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.02*"/>
+        <ColumnDefinition Width="0.96*"/>
+        <ColumnDefinition Width="0.02*"/>
+      </Grid.ColumnDefinitions>
+      
+      <Grid Grid.Row="0" Grid.Column="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="0.07*"/>
+          <RowDefinition Height="0.3*"/>
+          <RowDefinition Height="0.21*"/>
+          <RowDefinition Height="0.06*"/>
+          <RowDefinition Height="0.32*"/>
+          <RowDefinition Height="0.04*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="0.3*"/>
+          <ColumnDefinition Width="0.4*"/>
+          <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+        <abstractions:SvgImage Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.iPod.svg"/>
+        <abstractions:SvgImage Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.Headphones.svg"/>
+      </Grid>
+
+      <!--<Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Aspect="Fill" Source="{Binding SelectedMusicFile.AlbumArt}"/>-->
+
+    </Grid>
   
-  <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Aspect="Fill" Source="{Binding SelectedMusicFile.AlbumArt}"/>
- 
   <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="{x:Static codes:Colors.TransparentBlack}">
     <Grid.RowDefinitions>
       <RowDefinition Height="0.3*"/>
@@ -62,7 +93,7 @@
         <ColumnDefinition Width="0.2*"/>
       </Grid.ColumnDefinitions>
 
-      <abstractions:SvgImage Grid.Row="1" Grid.Column="1" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.PreviousButton.svg" HeightRequest="100" WidthRequest="100" >
+      <abstractions:SvgImage Grid.Row="1" Grid.Column="1" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.PreviousButton.svg" HeightRequest="150" WidthRequest="150" >
         <abstractions:SvgImage.GestureRecognizers>
           <TapGestureRecognizer Command="{Binding PlayPreviousSongCommand}"></TapGestureRecognizer>
         </abstractions:SvgImage.GestureRecognizers>  
