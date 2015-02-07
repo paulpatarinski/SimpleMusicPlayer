@@ -4,7 +4,8 @@
 					   xmlns:base="clr-namespace:Core.Pages.Base;assembly=Core"
 					   xmlns:codes="clr-namespace:Core.Helpers.Codes;assembly=Core"
              xmlns:valueConverters="clr-namespace:Core.Helpers.ValueConverters;assembly=Core"
-					   x:Class="Core.Pages.MusicPlayerPage">
+             xmlns:abstractions="clr-namespace:SVG.Forms.Plugin.Abstractions;assembly=SVG.Forms.Plugin.Abstractions"
+             x:Class="Core.Pages.MusicPlayerPage">
 
   <base:BasePage.Resources>
     <ResourceDictionary>
@@ -45,7 +46,7 @@
       </StackLayout>
     </Grid>
 
-    <Grid x:Name="musicPlayerControlsGrid" Grid.Row="1" Grid.Column="0">
+    <Grid Grid.Row="1" Grid.Column="0">
       <Grid.RowDefinitions>
         <RowDefinition Height="0.05*"/>
         <RowDefinition Height="0.95*"/>
@@ -60,6 +61,30 @@
         <ColumnDefinition Width="0.15*"/>
         <ColumnDefinition Width="0.2*"/>
       </Grid.ColumnDefinitions>
+
+      <abstractions:SvgImage Grid.Row="1" Grid.Column="1" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.PreviousButton.svg" HeightRequest="100" WidthRequest="100" >
+        <abstractions:SvgImage.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding PlayPreviousSongCommand}"></TapGestureRecognizer>
+        </abstractions:SvgImage.GestureRecognizers>  
+      </abstractions:SvgImage>
+
+      <abstractions:SvgImage Grid.Row="1" Grid.Column="3" IsVisible="{Binding IsPlayBtnVisibile}" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.PlayButton.svg" HeightRequest="100" WidthRequest="100" >
+        <abstractions:SvgImage.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding TogglePlayPauseCommand}"></TapGestureRecognizer>
+        </abstractions:SvgImage.GestureRecognizers>
+      </abstractions:SvgImage>
+
+      <abstractions:SvgImage Grid.Row="1" Grid.Column="3" IsVisible="{Binding IsPauseBtnVisible}" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.PauseButton.svg" HeightRequest="100" WidthRequest="100" >
+        <abstractions:SvgImage.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding TogglePlayPauseCommand}"></TapGestureRecognizer>
+        </abstractions:SvgImage.GestureRecognizers>
+      </abstractions:SvgImage>
+
+      <abstractions:SvgImage Grid.Row="1" Grid.Column="5" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.NextButton.svg" HeightRequest="100" WidthRequest="100" >
+        <abstractions:SvgImage.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding PlayNextSongCommand}"></TapGestureRecognizer>
+        </abstractions:SvgImage.GestureRecognizers>
+      </abstractions:SvgImage>
     </Grid>
     
   </Grid>
