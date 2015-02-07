@@ -58,11 +58,18 @@ namespace Core.ViewModels
     }
 
     private bool _isPauseBtnVisible;
+    private bool _isAlbumArtVisible;
 
     public bool IsPauseBtnVisible
     {
       get { return _isPauseBtnVisible; }
       set { SetProperty(ref _isPauseBtnVisible, value); }
+    }
+
+    public bool IsAlbumArtVisible
+    {
+      get { return _isAlbumArtVisible; }
+      set { SetProperty(ref _isAlbumArtVisible, value); }
     }
 
     public Command TogglePlayPauseCommand
@@ -121,6 +128,7 @@ namespace Core.ViewModels
 
     private void ExecutePlay(MusicFile musicFileToPlay)
     {
+      IsAlbumArtVisible = musicFileToPlay.AlbumArt != null;
       _mediaPlayerService.Play(musicFileToPlay.FileName, musicFileToPlay.FilePath);
     }
 

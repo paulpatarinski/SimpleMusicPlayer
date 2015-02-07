@@ -37,6 +37,7 @@
     <Compile Include="Helpers\Codes\Fonts.cs" />
     <Compile Include="Helpers\Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\ValueConverters\EllipsesStringValueConverter.cs" />
+    <Compile Include="Helpers\ValueConverters\OppositeBooleanValueConverter.cs" />
     <Compile Include="Models\EventArgs\AllFilesLoadedEventArgs.cs" />
     <Compile Include="Models\EventArgs\FileLoadedEventArgs.cs" />
     <Compile Include="Models\Id3Tag.cs" />

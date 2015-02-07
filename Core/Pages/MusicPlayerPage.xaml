@@ -10,10 +10,10 @@
   <base:BasePage.Resources>
     <ResourceDictionary>
     <valueConverters:EllipsesStringValueConverter x:Key="EllipsesStringValueConverter" />
+    <valueConverters:OppositeBooleanValueConverter x:Key="OppositeBooleanValueConverter" />
     </ResourceDictionary>
   </base:BasePage.Resources>
   <Grid BackgroundColor="{x:Static codes:Colors.Black}">
- 
   <Grid.RowDefinitions>
     <RowDefinition Height="0.75*"/>
     <RowDefinition Height="0.25*"/>
@@ -22,7 +22,7 @@
     <ColumnDefinition Width="*"/>
   </Grid.ColumnDefinitions>
 
-    <Grid Grid.Row="0" Grid.Column="0">
+    <Grid Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsAlbumArtVisible, Converter={StaticResource OppositeBooleanValueConverter}}">
       <Grid.RowDefinitions>
         <RowDefinition Height="0.9*"/>
         <RowDefinition Height="0.1*"/>
@@ -51,11 +51,11 @@
         <abstractions:SvgImage Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.Headphones.svg"/>
       </Grid>
 
-      <!--<Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Aspect="Fill" Source="{Binding SelectedMusicFile.AlbumArt}"/>-->
-
     </Grid>
-  
-  <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="{x:Static codes:Colors.TransparentBlack}">
+
+    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Aspect="Fill" Source="{Binding SelectedMusicFile.AlbumArt}" IsVisible="{Binding IsAlbumArtVisible}"/>
+
+    <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="{x:Static codes:Colors.TransparentBlack}">
     <Grid.RowDefinitions>
       <RowDefinition Height="0.3*"/>
       <RowDefinition Height="0.7*"/>
