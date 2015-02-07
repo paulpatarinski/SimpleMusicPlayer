@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\Id3TagService.cs" />
+    <Compile Include="Services\MediaPlayerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
