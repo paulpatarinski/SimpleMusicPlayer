@@ -175,10 +175,10 @@
     </Reference>
     <Reference Include="SVG.Forms.Plugin.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.12\lib\wp8\SVG.Forms.Plugin.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.13\lib\wp8\SVG.Forms.Plugin.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="SVG.Forms.Plugin.WindowsPhone">
-      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.12\lib\wp8\SVG.Forms.Plugin.WindowsPhone.dll</HintPath>
+      <HintPath>..\packages\Xam.Plugins.Forms.SVG.1.0.0.13\lib\wp8\SVG.Forms.Plugin.WindowsPhone.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WPControls">
