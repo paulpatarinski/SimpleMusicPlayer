@@ -24,32 +24,41 @@
 
     <Grid Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsAlbumArtVisible, Converter={StaticResource OppositeBooleanValueConverter}}">
       <Grid.RowDefinitions>
-        <RowDefinition Height="0.9*"/>
-        <RowDefinition Height="0.1*"/>
+        <RowDefinition Height="0.02*"/>
+        <RowDefinition Height="0.98*"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="0.02*"/>
-        <ColumnDefinition Width="0.96*"/>
-        <ColumnDefinition Width="0.02*"/>
+        <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       
-      <Grid Grid.Row="0" Grid.Column="1">
+      <Grid Grid.Row="1" Grid.Column="0">
         <Grid.RowDefinitions>
-          <RowDefinition Height="0.07*"/>
-          <RowDefinition Height="0.3*"/>
-          <RowDefinition Height="0.21*"/>
-          <RowDefinition Height="0.06*"/>
-          <RowDefinition Height="0.32*"/>
-          <RowDefinition Height="0.04*"/>
+          <RowDefinition Height="0.34*"/>
+          <RowDefinition Height="0.66*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="0.3*"/>
-          <ColumnDefinition Width="0.4*"/>
-          <ColumnDefinition Width="0.3*"/>
+          <ColumnDefinition Width="0.34*"/>
+          <ColumnDefinition Width="0.32*"/>
+          <ColumnDefinition Width="0.34*"/>
         </Grid.ColumnDefinitions>
-        <abstractions:SvgImage Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.iPod.svg"/>
-        <abstractions:SvgImage Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.Headphones.svg"/>
+        <abstractions:SvgImage Grid.Row="1" Grid.Column="1" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.iPod.svg"/>
       </Grid>
+      
+      <Grid Grid.Row="1" Grid.Column="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="0.05*"/>
+          <RowDefinition Height="0.55*"/>
+          <RowDefinition Height="0.4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="0.138*"/>
+          <ColumnDefinition Width="0.8*"/>
+          <ColumnDefinition Width="0.062*"/>
+        </Grid.ColumnDefinitions>
+        <abstractions:SvgImage Grid.Row="1" Grid.Column="1" SvgAssembly="{Binding SvgAssembly}" SvgPath="Core.Images.Headphones.svg"/>
+      </Grid>
+
+
 
     </Grid>
 
